@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Base Code — Sites e Landing Pages que vendem por você</title>
+  <meta name="description" content="A Base Code cria landing pages e sites profissionais para qualquer nicho. Design que passa confiança, entrega rápida e orçamento direto pelo WhatsApp.">
+
+  <!-- Fontes: preconnect para liberar handshake TLS cedo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Figtree:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Figtree:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+
+  <!-- CSS crítico -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/page.css">
+
+  <!-- CSS não-crítico -->
+  <link rel="preload" as="style" href="css/animations.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <link rel="preload" as="style" href="css/effects.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/effects.css"></noscript>
+
+  <!-- Swiper CSS -->
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
+
+  <style>
+    /* ═══ LIQUID GLASS HEADER ═══ */
+    .lg-header {
+      position: fixed;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(1060px, calc(100% - 28px));
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      padding: 0.32rem 0.32rem 0.32rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(10, 15, 28, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      transition: background .3s ease, box-shadow .3s ease, top .3s ease;
+    }
+    .lg-header.scrolled {
+      background: rgba(8, 12, 24, 0.78);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(79, 195, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+    .lg-logo {
+      display: flex; align-items: center; gap: 0.55rem;
+      font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 1rem;
+      letter-spacing: -0.02em; white-space: nowrap;
+    }
+    .lg-logo__mark {
+      width: 28px; height: 28px; flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 9px;
+      border: 1px solid rgba(127, 199, 255, 0.35);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 42%),
+        linear-gradient(180deg, #1c4d8f 0%, #0b2a55 55%, #061833 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -3px 6px rgba(0, 8, 24, 0.7),
+        inset 0 0 10px rgba(10, 116, 255, 0.45),
+        0 4px 12px rgba(0, 0, 0, 0.55),
+        0 2px 6px rgba(10, 116, 255, 0.4);
+      color: #bfe4ff;
+      position: relative;
+      transition: box-shadow .3s ease, transform .3s ease;
+    }
+    .lg-logo:hover .lg-logo__mark {
+      transform: translateY(-1px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -3px 6px rgba(0, 8, 24, 0.65),
+        inset 0 0 12px rgba(10, 116, 255, 0.55),
+        0 5px 14px rgba(0, 0, 0, 0.6),
+        0 3px 10px rgba(10, 116, 255, 0.55);
+    }
+    .lg-logo__mark::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(160deg, rgba(255,255,255,0.28) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .lg-logo__text { display: flex; flex-direction: column; line-height: 1.05; }
+    .lg-logo__name { font-weight: 800; letter-spacing: -0.02em; }
+    .lg-logo__tag {
+      font-size: 0.5rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(79, 195, 255, 0.75);
+    }
+    .lg-menu { display: flex; align-items: center; gap: 0.15rem; list-style: none; }
+    .lg-menu a {
+      display: block;
+      padding: 0.38rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.88rem; font-weight: 500;
+      color: rgba(226, 234, 245, 0.72);
+      transition: color .2s ease, background .2s ease;
+    }
+    .lg-menu a:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+    .lg-menu a.active { color: var(--kit-color-blue-light, #4fc3ff); background: rgba(10, 116, 255, 0.12); }
+    .lg-cta {
+      padding: 0.44rem 1.15rem;
+      border-radius: 999px;
+      font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.86rem;
+      color: #fff; white-space: nowrap;
+      background: linear-gradient(120deg, #0a74ff, #0c9bff);
+      box-shadow: 0 4px 18px rgba(10, 116, 255, 0.4);
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: inline-block;
+    }
+    .lg-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 26px rgba(10, 116, 255, 0.55); }
+    .lg-burger {
+      display: none;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff; cursor: pointer;
+      place-items: center;
+    }
+    .lg-burger svg { transition: transform .3s ease; }
+    .lg-burger.open svg { transform: rotate(45deg); }
+    .lg-overlay {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(4, 7, 14, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .lg-overlay.open { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 899px) {
+      .lg-menu {
+        position: fixed;
+        top: 62px; left: 50%;
+        transform: translateX(-50%) translateY(-12px) scale(0.98);
+        width: min(400px, calc(100% - 28px));
+        flex-direction: column; align-items: stretch; gap: 0.2rem;
+        padding: 0.8rem;
+        border-radius: 24px;
+        background: rgba(10, 15, 28, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(22px) saturate(160%);
+        -webkit-backdrop-filter: blur(22px) saturate(160%);
+        opacity: 0; pointer-events: none;
+        transition: opacity .28s ease, transform .28s ease;
+      }
+      .lg-menu.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0) scale(1); }
+      .lg-menu a { padding: 0.85rem 1.1rem; font-size: 1rem; }
+      .lg-burger { display: grid; }
+      .lg-cta--desktop { display: none; }
+      .lg-header { padding: 0.45rem 0.45rem 0.45rem 1rem; }
+    }
+
+    [data-anim] { opacity: 0; }
+
+    .swiper-pagination { display: none; }
+    @media (max-width: 767px) {
+      .swiper-pagination { display: block; }
+      [data-anim-swiper] { padding-bottom: 2rem; }
+    }
+
+    .kit-section-lazy {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+
+    /* ═══ SEÇÃO ARCO DE IMAGENS ═══ */
+    .arco-section {
+      --arco-bg: #080c16;
+      --arco-card-size: 19.6875rem;
+      --arco-step: 14deg;
+      --arco-radius: 82em;
+      --arco-card-radius: 16px;
+      background: var(--arco-bg);
+      overflow: hidden;
+    }
+    .arco-panel {
+      position: relative;
+      height: 100svh;
+      min-height: 520px;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: min(4.25rem, 6.5vh) 0 min(2.5rem, 6vh);
+      gap: min(1.5rem, 3vh);
+    }
+    .arco-panel::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 5rem;
+      background: linear-gradient(to bottom, transparent, var(--arco-bg));
+      pointer-events: none; z-index: 1;
+    }
+    .arco-intro { max-width: var(--container); margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+    .arco-intro .kit-label { display: inline-block; margin: 0 0 0.75rem; }
+    .arco-heading {
+      margin: 0;
+      font-family: var(--font-display); font-weight: 800;
+      font-size: min(clamp(3.125rem, 2.4rem + 3.35vw, 6.875rem), 9vh);
+      line-height: 1.05; letter-spacing: -0.02em;
+      text-indent: -0.065em;
+    }
+    .arco-lead {
+      margin: 1rem 0 0;
+      font-size: min(clamp(1.75rem, 1.62rem + 0.55vw, 2.125rem), 4vh);
+      line-height: 1.2; letter-spacing: -0.02em;
+      color: var(--text-secondary);
+      max-width: 900px;
+    }
+    .arco-stage {
+      flex: 1;
+      display: flex; align-items: flex-end; justify-content: center;
+      width: 100%;
+      min-height: 0;
+    }
+    .arco-collection { width: min(var(--arco-card-size), 64vh); }
+    .arco-list {
+      display: grid; list-style: none;
+      transform-origin: 50% var(--arco-radius);
+    }
+    .arco-item {
+      grid-area: 1 / 1;
+      transform: rotate(calc(var(--arco-step) * (var(--card-index) - 1)));
+      transform-origin: 50% var(--arco-radius);
+      will-change: transform;
+    }
+    .arco-card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      border-radius: var(--arco-card-radius);
+      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background: var(--bg-navy);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        0 0 0 1px rgba(10, 116, 255, 0.18),
+        0 24px 70px rgba(0, 0, 0, 0.55),
+        0 0 42px rgba(10, 116, 255, 0.12);
+    }
+    .arco-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .arco-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,12,24,0.05) 35%, rgba(8,12,24,0.45) 70%, rgba(4,6,12,0.88) 100%);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .arco-card__title {
+      margin: 0;
+      position: relative; z-index: 2;
+      padding: 0 1.5rem 1.5rem;
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(1.375rem, 1.2rem + 0.77vw, 2.875rem); line-height: 0.9; letter-spacing: -0.04em;
+      color: #f2f6fc;
+      text-wrap: balance;
+    }
+    /* fallback sem movimento (reduced-motion / JS off) */
+    .arco-section--static .arco-panel { min-height: 0; }
+    .arco-section--static .arco-list {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+      transform: none !important;
+      width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 1.5rem;
+    }
+    .arco-section--static .arco-item { transform: none; }
+    @media (min-width: 768px) {
+      .arco-panel { padding-top: min(4.25rem, 6.5vh); padding-bottom: min(2.5rem, 5vh); gap: min(2.5rem, 4vh); }
+      .arco-panel::after { height: 8rem; }
+      .arco-section { --arco-radius: 90em; }
+      .arco-card__title { font-size: 1.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .arco-section { --arco-card-size: 36rem; --arco-step: 24deg; }
+      .arco-panel { gap: min(3.75rem, 6vh); }
+      .arco-card__title { font-size: min(clamp(2.5rem, 2.01rem + 0.77vw, 2.875rem), 6vh); }
+    }
+    @media (max-width: 767px) {
+      .arco-panel { padding-bottom: 4.5rem; gap: 3rem; }
+      .arco-section--static .arco-list { grid-template-columns: 1fr 1fr; padding: 0 1.15rem; }
+    }
+
+    /* ═══ Sobreposição da próxima seção sobre o arco ═══ */
+    .arco-section { position: relative; z-index: 0; }
+    #urgencia {
+      position: relative;
+      z-index: 2;
+      margin-top: clamp(-22rem, -32vh, -10rem);
+      border-radius: 32px 32px 0 0;
+      /* Topo transparente → dissolve o arco gradualmente (efeito de "vinheta" suave) */
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.45) 120px, #000000 260px) !important;
+    }
+
+    /* ═══ MODERNIZAÇÃO: O QUE MUDA (antes/depois) ═══ */
+    #o-que-muda .page-before-after__grid {
+      max-width: 920px;
+      margin: 0 auto;
+      gap: 1.25rem;
+      position: relative;
+    }
+    #o-que-muda .page-before-after__heading { font-size: 1.15rem !important; margin-bottom: 0.9rem !important; }
+    #o-que-muda .page-before-after__box {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0d1526 0%, #0a0f1c 55%, #0d1f3a 100%) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+      border-radius: 20px !important;
+      padding: 1.2rem 1.15rem !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+      transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .35s ease, box-shadow .35s ease;
+    }
+    /* Linha de luz no topo de cada card */
+    #o-que-muda .page-before-after__box::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    }
+    #o-que-muda .page-before-after__box--after { border-color: rgba(79, 195, 255, 0.55) !important; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), 0 0 34px rgba(10, 116, 255, 0.1) inset, 0 0 26px rgba(10, 116, 255, 0.18); }
+    #o-que-muda .page-before-after__box:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79, 195, 255, 0.4) !important;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 44px rgba(10, 116, 255, 0.14);
+    }
+    /* Itens: mais compactos, ícones em tile */
+    #o-que-muda .page-before-after__list { gap: 0.6rem !important; }
+    #o-que-muda .page-before-after__item { gap: 0.6rem !important; align-items: center !important; }
+    #o-que-muda .page-before-after__item p { font-size: 0.92rem !important; line-height: 1.5 !important; }
+    #o-que-muda .page-before-after__icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 9px;
+      font-size: 0.78rem; font-weight: 700;
+      border: 1px solid rgba(255, 120, 120, 0.3);
+      background: rgba(255, 80, 80, 0.09);
+      color: #ff8a8a;
+      line-height: 1 !important;
+    }
+    #o-que-muda .page-before-after__col--after .page-before-after__icon {
+      border-color: rgba(79, 195, 255, 0.4);
+      background: rgba(10, 116, 255, 0.14);
+      color: #4fc3ff;
+    }
+    /* Brilho ambiente atrás da grade */
+    #o-que-muda .page-before-after__grid::before {
+      content: '';
+      position: absolute; inset: -12% -6%;
+      background: radial-gradient(ellipse 60% 55% at 70% 40%, rgba(10, 116, 255, 0.09), transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ═══ MODERNIZAÇÃO: PROCESSO (minimalista) ═══ */
+    #processo .kit-process__timeline {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    #processo .kit-process__line {
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(79, 195, 255, 0.5), rgba(79, 195, 255, 0.06));
+      box-shadow: 0 0 12px rgba(10, 116, 255, 0.35);
+    }
+    #processo .kit-process__step { padding-left: 0.35rem; }
+    #processo .kit-process__number {
+      width: 40px; height: 40px;
+      background: rgba(10, 15, 28, 0.9) !important;
+      border: 1px solid rgba(79, 195, 255, 0.35) !important;
+      box-shadow: 0 0 18px rgba(10, 116, 255, 0.25) !important;
+      border-radius: 12px;
+      font-size: 0.8rem !important;
+      transition: border-color .3s ease, box-shadow .3s ease, color .3s ease;
+    }
+    #processo .kit-process__step:hover .kit-process__number {
+      border-color: rgba(79, 195, 255, 0.8);
+      box-shadow: 0 0 26px rgba(10, 116, 255, 0.5) !important;
+      color: #fff;
+    }
+    #processo .kit-process__content {
+      background: transparent !important;
+      border: none !important;
+      padding: 0.55rem 0 0.55rem 0.35rem !important;
+    }
+    #processo .kit-process__title {
+      font-size: 1.2rem !important;
+      color: #f2f6fc;
+      transition: color .3s ease;
+    }
+    #processo .kit-process__step:hover .kit-process__title { color: #4fc3ff; }
+    #processo .kit-process__desc {
+      margin-top: 0.4rem !important;
+      font-size: 0.98rem !important;
+      color: var(--text-secondary) !important;
+      max-width: 540px;
+    }
+
+    /* ═══ ÍCONES 3D DARK BLUE (entregáveis) ═══ */
+    #entregaveis .kit-benefits__icon.kit-icon-wrapper {
+      width: 54px; height: 54px;
+      border-radius: 15px;
+      border: 1px solid rgba(79, 195, 255, 0.28);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 38%),
+        linear-gradient(180deg, #14335e 0%, #0a1c38 100%);
+      background-blend-mode: normal, normal;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -3px 8px rgba(0, 10, 30, 0.65),
+        inset 0 0 18px rgba(10, 116, 255, 0.25),
+        0 8px 20px rgba(0, 0, 0, 0.5),
+        0 3px 10px rgba(10, 116, 255, 0.28);
+      color: #7dd0ff;
+      filter: drop-shadow(0 0 10px rgba(10, 116, 255, 0.25));
+      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, color .3s ease;
+    }
+    #entregaveis .kit-benefits__card:hover .kit-benefits__icon.kit-icon-wrapper {
+      transform: translateY(-3px) scale(1.04);
+      color: #a8e0ff;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -3px 8px rgba(0, 10, 30, 0.6),
+        inset 0 0 22px rgba(10, 116, 255, 0.35),
+        0 12px 28px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(10, 116, 255, 0.45);
+    }
+
+    /* ═══ OFERTA: card mais compacto ═══ */
+    #oferta .page-pricing__card {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: clamp(1.4rem, 3vw, 2rem) !important;
+    }
+    #oferta .page-pricing__header .kit-h2 {
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem) !important;
+    }
+    #oferta .page-pricing__checklist { gap: 0.65rem !important; }
+    #oferta .page-pricing__check-item { font-size: 0.95rem !important; line-height: 1.45 !important; }
+    #oferta .page-pricing__check-icon { width: 20px !important; height: 20px !important; font-size: 0.7rem !important; }
+    #oferta .page-pricing__price-wrapper { margin-top: 1.5rem !important; }
+    #oferta .page-pricing__guarantee { padding: 0.9rem 1rem !important; margin-top: 1.2rem !important; }
+    #oferta .page-pricing__guarantee .kit-body-sm { font-size: 0.85rem !important; }
+
+    /* ═══ BOTÃO FLUTUANTE WHATSAPP ═══ */
+    .wa-float {
+      position: fixed;
+      right: 22px; bottom: 22px;
+      z-index: 90;
+      width: 58px; height: 58px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(127, 199, 255, 0.4);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.02) 45%),
+        linear-gradient(180deg, #1c4d8f 0%, #0d3060 55%, #071c3a 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -4px 8px rgba(0, 8, 24, 0.7),
+        inset 0 0 16px rgba(10, 116, 255, 0.4),
+        0 10px 30px rgba(0, 0, 0, 0.55),
+        0 4px 14px rgba(10, 116, 255, 0.35);
+      color: #bfe4ff;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .wa-float::before, .wa-float::after {
+      content: '';
+      position: absolute; inset: -2px;
+      border-radius: 50%;
+      border: 2px solid rgba(79, 195, 255, 0.55);
+      animation: wa-pulse 2.4s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+      pointer-events: none;
+    }
+    .wa-float::after { animation-delay: 1.2s; }
+    @keyframes wa-pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      70% { transform: scale(1.65); opacity: 0; }
+      100% { transform: scale(1.65); opacity: 0; }
+    }
+    .wa-float:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -4px 8px rgba(0, 8, 24, 0.65),
+        inset 0 0 20px rgba(10, 116, 255, 0.5),
+        0 14px 36px rgba(0, 0, 0, 0.6),
+        0 6px 20px rgba(10, 116, 255, 0.5);
+    }
+    .wa-float svg { position: relative; z-index: 2; }
+    .wa-float__tip {
+      position: absolute;
+      right: 70px; top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 600;
+      color: #f2f6fc;
+      background: rgba(10, 15, 28, 0.85);
+      border: 1px solid rgba(79, 195, 255, 0.3);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .wa-float:hover .wa-float__tip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(-4px);
+    }
+    @media (max-width: 767px) {
+      .wa-float { right: 16px; bottom: 16px; width: 52px; height: 52px; }
+      .wa-float__tip { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wa-float::before, .wa-float::after { animation: none; opacity: 0; }
+    }
+
+    /* ═══ VÍDEO NO CARROSSEL DE PORTFÓLIO ═══ */
+    .kit-portfolio__video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--kit-radius-md);
+      overflow: hidden;
+      background: #0a0f1c;
+    }
+    .kit-portfolio__video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* HERO */
+    #tubes-section {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      overflow: visible !important;
+      background:
+        radial-gradient(circle 520px at 50% -12%, rgba(10, 116, 255, 0.42) 0%, rgba(10, 116, 255, 0.16) 40%, rgba(10, 116, 255, 0) 72%),
+        var(--kit-bg-primary) !important;
+    }
+
+    #modelos {
+      background: linear-gradient(to bottom, #000000 0%, #0a0f1c 180px) !important;
+      margin-top: -2px !important;
+    }
+
+    #tubes-section .kit-glow-line {
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      z-index: 5 !important;
+    }
+
+    @media (max-width: 767px) {
+      #processo { overflow-x: visible !important; }
+      #processo .kit-container { overflow: visible !important; }
+      #processo .kit-process__step {
+        flex-direction: row !important;
+        gap: 0.875rem !important;
+        align-items: flex-start !important;
+        padding-left: 0 !important;
+      }
+      #processo .kit-process__number {
+        position: static !important;
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0.875rem !important;
+        flex-shrink: 0 !important;
+      }
+      #processo .kit-process__content { flex: 1 !important; min-width: 0 !important; overflow: visible !important; }
+      #processo .kit-process__title, #processo .kit-process__desc {
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+      }
+      #processo .kit-process__timeline { overflow: visible !important; }
+
+      #o-que-muda .page-before-after__grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      #o-que-muda .page-before-after__col { width: 100% !important; min-width: 0 !important; }
+      #o-que-muda .page-before-after__box {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 1.25rem 1rem !important;
+        overflow: hidden !important;
+      }
+      #o-que-muda .page-before-after__item {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 0.625rem !important;
+        overflow: hidden !important;
+      }
+      #o-que-muda .page-before-after__item p {
+        flex: 1 !important;
+        min-width: 0 !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        margin: 0 !important;
+      }
+      #o-que-muda .page-before-after__icon { flex-shrink: 0 !important; line-height: 1.5 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER LIQUID GLASS ═══ -->
+  <header class="lg-header" id="lgHeader">
+    <a href="#tubes-section" class="lg-logo" aria-label="Base Code — início">
+      <span class="lg-logo__mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 6L3 12l5 6"/>
+          <path d="M16 6l5 6-5 6"/>
+          <line x1="13.5" y1="5" x2="10.5" y2="19"/>
+        </svg>
+      </span>
+      <span class="lg-logo__text">
+        <span class="lg-logo__name">Base <span class="kit-text-gradient-blue">Code</span></span>
+        <span class="lg-logo__tag">web studio</span>
+      </span>
+    </a>
+
+    <nav aria-label="Menu principal">
+      <ul class="lg-menu" id="lgMenu">
+        <li><a href="#modelos">Portfólio</a></li>
+        <li><a href="#o-que-muda">O que muda</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#entregaveis">Entregáveis</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li style="padding: 0.3rem 0.4rem 0.2rem;"><a href="#" class="lg-cta" data-wa style="color:#fff;">Orçamento grátis</a></li>
+      </ul>
+    </nav>
+
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="#" class="lg-cta lg-cta--desktop" data-wa>Orçamento grátis</a>
+      <button class="lg-burger" id="lgBurger" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="5" x2="15" y2="5"/><line x1="3" y1="9" x2="15" y2="9"/><line x1="3" y1="13" x2="15" y2="13"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="lg-overlay" id="lgOverlay"></div>
+
+  <!-- ═══ BLOCO 1: Hero ═══ -->
+  <section id="tubes-section" class="kit-section kit-hero kit-bg-dark">
+    <div class="kit-hero__watermark kit-watermark" aria-hidden="true">B.C</div>
+
+    <div class="kit-container" style="position: relative; z-index: 2; padding-top: clamp(3rem, 9vh, 5.5rem);">
+      <h1 class="kit-hero__headline kit-display" data-anim="fade-up" data-anim-delay="0.2">
+        Um site que vende por você, no ar em <span class="kit-text-gradient-blue">dias, não em meses</span>
+      </h1>
+
+      <p class="kit-hero__description kit-body-lg" data-anim="fade-up" data-anim-delay="0.35">
+        A <strong>Base Code</strong> cria landing pages e sites profissionais para o seu negócio: design que passa confiança, textos que convertem e uma página pronta para trabalhar por você 24/7.
+      </p>
+
+      <div class="kit-hero__cta" data-anim="fade-up" data-anim-delay="0.5">
+        <a href="#" class="kit-btn-shiny" data-wa>
+          Quero meu orçamento pelo WhatsApp
+        </a>
+      </div>
+
+      <p class="kit-caption" data-anim="fade-up" data-anim-delay="0.6" style="margin-top: var(--kit-gap-md); opacity: 0.7;">
+        Orçamento <strong>gratuito e sem compromisso</strong>, avaliamos seu projeto na hora
+      </p>
+    </div>
+
+    <div class="kit-glow-line" style="position: absolute; bottom: 0;"></div>
+  </section>
+
+
+  <!-- ═══ BLOCO 2: Portfólio / Carousel ═══ -->
+  <section id="modelos" class="kit-section kit-portfolio kit-bg-deep" data-anim="portfolio-section">
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">portfólio</span>
+        <h2 class="kit-h1">Projetos que já <span class="kit-text-gradient-blue">estão no AR</span></h2>
+      </div>
+
+      <div class="kit-portfolio__carousel swiper" data-anim-swiper data-anim="fade-up" data-anim-delay="0.2">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide kit-portfolio__slide">
+            <div class="kit-card">
+              <div class="kit-portfolio__video">
+                <iframe
+                  src="https://player.vimeo.com/video/1229036616?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;quality=1080p"
+                  title="Modelo de landing page criado pela Base Code"
+                  frameborder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  loading="lazy"></iframe>
+              </div>
+              <div class="kit-portfolio__caption">
+                <h3 class="kit-h4">Landing Page de Conversão</h3>
+                <p class="kit-body-sm">Veja um dos modelos em ação</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide kit-portfolio__slide">
+            <div class="kit-card kit-img-hover-zoom">
+              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 2" loading="lazy" width="1439" height="757" decoding="async" />
+              <div class="kit-portfolio__caption">
+                <h3 class="kit-h4">Site Institucional</h3>
+                <p class="kit-body-sm">Presença digital que gera credibilidade para sua marca</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide kit-portfolio__slide">
+            <div class="kit-card kit-img-hover-zoom">
+              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 3" loading="lazy" width="1439" height="757" decoding="async" />
+              <div class="kit-portfolio__caption">
+                <h3 class="kit-h4">Página de Serviço</h3>
+                <p class="kit-body-sm">Apresente sua oferta com clareza e profissionalismo</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide kit-portfolio__slide">
+            <div class="kit-card kit-img-hover-zoom">
+              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 4" loading="lazy" width="1439" height="757" decoding="async" />
+              <div class="kit-portfolio__caption">
+                <h3 class="kit-h4">Menu Digital / Restaurante</h3>
+                <p class="kit-body-sm">Seu cardápio e reservas em um link que vende mais</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 3: Antes/Depois ═══ -->
+  <section id="o-que-muda" class="kit-section kit-bg-navy page-before-after" data-anim="benefits-section">
+    <div class="kit-separator"></div>
+
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">transformação</span>
+        <h2 class="kit-h1">O que muda com a <span class="kit-text-gradient-blue">Base Code</span></h2>
+      </div>
+
+      <div class="page-before-after__grid">
+        <div class="page-before-after__col page-before-after__col--before" data-anim="fade-left" data-anim-delay="0.1">
+          <h3 class="kit-h3 page-before-after__heading page-before-after__heading--before">Se você…</h3>
+          <div class="kit-card page-before-after__box page-before-after__box--before">
+            <ul class="page-before-after__list">
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✕</span>
+                <p class="kit-body-sm">Tentou montar um site sozinho e terminou com algo que <strong>não passa confiança</strong>.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✕</span>
+                <p class="kit-body-sm">Perdeu horas em ferramentas e tutoriais e ficou com a sensação de <strong>"perdi tempo e não saiu nada"</strong>.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✕</span>
+                <p class="kit-body-sm">Perde clientes que clicam no seu link e <strong>desistem pela aparência da página</strong>.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✕</span>
+                <p class="kit-body-sm">Recebeu orçamentos absurdos de agências para <strong>algo que deveria ser simples</strong>.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="page-before-after__col page-before-after__col--after" data-anim="fade-right" data-anim-delay="0.2">
+          <h3 class="kit-h3 page-before-after__heading page-before-after__heading--after">Com a Base Code você vai</h3>
+          <div class="kit-card page-before-after__box page-before-after__box--after">
+            <ul class="page-before-after__list">
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✓</span>
+                <p class="kit-body-sm">Ter um site profissional <strong>sem mexer em nada de design ou código</strong>.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✓</span>
+                <p class="kit-body-sm">Receber uma página <strong>feita para o seu nicho</strong>, com estrutura e textos que convertem.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✓</span>
+                <p class="kit-body-sm">Passar <strong>confiança e credibilidade</strong> de primeira, quando o cliente abrir seu link.</p>
+              </li>
+              <li class="page-before-after__item">
+                <span class="page-before-after__icon">✓</span>
+                <p class="kit-body-sm">Ter um orçamento <strong>justo e transparente</strong>, direto no WhatsApp, sem enrolação.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--kit-gap-xl);" data-anim="fade-up" data-anim-delay="0.4">
+        <a href="#" class="kit-btn-shiny" data-wa>
+          Conversar sobre meu projeto
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 3.5: ARCO DE IMAGENS ═══ -->
+  <section id="arco" class="arco-section" aria-label="Portfólio de serviços">
+    <div class="arco-panel">
+      <div class="arco-intro">
+        <span class="kit-label kit-label-alt">portfólio</span>
+        <h2 class="arco-heading">Modelos de Projetos que já <span class="kit-text-gradient-blue">estão no AR</span>.</h2>
+        <p class="arco-lead">Criamos páginas para qualquer nicho, cada uma com design, copy e estrutura pensados para <strong>converter visitantes em clientes</strong>.</p>
+      </div>
+
+      <div class="arco-stage">
+        <div class="arco-collection">
+          <ul class="arco-list" id="arcoList">
+            <li class="arco-item" style="--card-index: 1;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Landing page de alta conversão criada pela Base Code" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Landing Pages</h3>
+              </article>
+            </li>
+            <li class="arco-item" style="--card-index: 2;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Site institucional profissional criado pela Base Code" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Sites Institucionais</h3>
+              </article>
+            </li>
+            <li class="arco-item" style="--card-index: 3;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Site para restaurante com menu digital" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Menus Digitais</h3>
+              </article>
+            </li>
+            <li class="arco-item" style="--card-index: 4;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Portfólio profissional para prestadores de serviço" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Portfólios</h3>
+              </article>
+            </li>
+            <li class="arco-item" style="--card-index: 5;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Página de vendas para infoprodutos" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Páginas de Vendas</h3>
+              </article>
+            </li>
+            <li class="arco-item" style="--card-index: 6;">
+              <article class="arco-card">
+                <img src="images/01.png" alt="Site de agendamento para clínicas e barbearias" loading="lazy" decoding="async">
+                <h3 class="arco-card__title">Sites de Agendamento</h3>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 4: Urgência ═══ -->
+  <section id="urgencia" class="kit-section kit-cta kit-bg-dark page-urgencia" data-anim="cta-section">
+    <div class="kit-bokeh-container" data-anim-bokeh="10"></div>
+    <div class="kit-ambient-glow"></div>
+
+    <div class="kit-container" style="position: relative; z-index: 2; text-align: center;">
+      <h2 class="kit-cta__headline kit-h1" data-anim="fade-up" data-anim-delay="0.1">
+        Enquanto seu site não passa confiança, o cliente <span class="kit-text-gradient-blue">fecha com o concorrente</span> que tem uma página melhor.
+      </h2>
+
+      <p class="kit-body-lg" data-anim="fade-up" data-anim-delay="0.25" style="margin-top: var(--kit-gap-lg);">
+        É isso que acontece toda vez que alguém clica no seu link e encontra uma página com cara de improviso:
+      </p>
+
+      <div class="page-urgencia__flow" data-anim="fade-up" data-anim-delay="0.35">
+        <span class="page-urgencia__step">CLIQUE</span>
+        <span class="page-urgencia__arrow">→</span>
+        <span class="page-urgencia__step page-urgencia__step--danger">DESCONFIANÇA</span>
+        <span class="page-urgencia__arrow">→</span>
+        <span class="page-urgencia__step page-urgencia__step--danger">ABANDONO</span>
+      </div>
+
+      <p class="kit-h3 kit-text-gradient" data-anim="fade-up" data-anim-delay="0.5" style="margin-top: var(--kit-gap-xl);">
+        Seu site é a primeira impressão. Não deixe ela por conta do acaso.
+      </p>
+    </div>
+
+    <div class="kit-glow-line" style="position: absolute; bottom: 0;"></div>
+  </section>
+
+
+  <!-- ═══ BLOCO 5: Processo ═══ -->
+  <section id="processo" class="kit-section kit-process kit-bg-navy" data-anim="process-section">
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">passo a passo</span>
+        <h2 class="kit-h1">Como funciona <span class="kit-text-gradient-blue">na prática</span></h2>
+        <p class="kit-body-lg">Um processo simples e direto: você conversa, a gente cria, você aprova. O resto é com a Base Code.</p>
+      </div>
+
+      <div class="kit-process__timeline">
+        <div class="kit-process__line"></div>
+
+        <div class="kit-process__step" data-anim="fade-left" data-anim-delay="0.1">
+          <div class="kit-process__number kit-label">01</div>
+          <div class="kit-process__content kit-card">
+            <h3 class="kit-process__title kit-h3">Conte seu projeto no WhatsApp</h3>
+            <p class="kit-process__desc kit-body">Me conta o que você precisa: o nicho, o objetivo da página e o que você quer transmitir. Simples assim.</p>
+          </div>
+        </div>
+
+        <div class="kit-process__step" data-anim="fade-left" data-anim-delay="0.25">
+          <div class="kit-process__number kit-label">02</div>
+          <div class="kit-process__content kit-card">
+            <h3 class="kit-process__title kit-h3">Receba sua proposta e orçamento</h3>
+            <p class="kit-process__desc kit-body">Analisamos seu projeto e devolvemos um orçamento claro, sem letra miúda, com prazo e tudo que está incluso.</p>
+          </div>
+        </div>
+
+        <div class="kit-process__step" data-anim="fade-left" data-anim-delay="0.4">
+          <div class="kit-process__number kit-label">03</div>
+          <div class="kit-process__content kit-card">
+            <h3 class="kit-process__title kit-h3">A gente cria sua página</h3>
+            <p class="kit-process__desc kit-body">Design, estrutura e textos pensados para o seu público. Você acompanha o andamento e pode pedir ajustes pelo caminho.</p>
+          </div>
+        </div>
+
+        <div class="kit-process__step" data-anim="fade-left" data-anim-delay="0.55">
+          <div class="kit-process__number kit-label">04</div>
+          <div class="kit-process__content kit-card">
+            <h3 class="kit-process__title kit-h3">Aprove e coloque no ar</h3>
+            <p class="kit-process__desc kit-body">Você revisa, aprova e recebe tudo pronto para publicar, com a página funcionando perfeitamente no celular e no computador.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 6: Entregáveis ═══ -->
+  <section id="entregaveis" class="kit-section kit-benefits kit-bg-dark" data-anim="benefits-section">
+    <div class="kit-separator"></div>
+
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">// o que você recebe</span>
+        <h2 class="kit-h1">Tudo o que seu site precisa está <span class="kit-text-gradient-blue">aqui dentro</span>.</h2>
+      </div>
+
+      <div class="kit-benefits__grid">
+        <div class="kit-benefits__card kit-card kit-hover-lift" data-anim="fade-up" data-anim-delay="0.1">
+          <div class="kit-benefits__glow"></div>
+          <div class="kit-benefits__icon kit-icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="kit-benefits__title kit-h4">Design que passa confiança</h3>
+          <p class="kit-benefits__desc kit-body-sm">Visual profissional e moderno, pensado para o seu nicho e para impressionar de primeira.</p>
+        </div>
+
+        <div class="kit-benefits__card kit-card kit-hover-lift" data-anim="fade-up" data-anim-delay="0.2">
+          <div class="kit-benefits__glow"></div>
+          <div class="kit-benefits__icon kit-icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          </div>
+          <h3 class="kit-benefits__title kit-h4">Copy que converte</h3>
+          <p class="kit-benefits__desc kit-body-sm">Textos escritos para guiar o visitante até a ação: chamar no WhatsApp, comprar ou agendar.</p>
+        </div>
+
+        <div class="kit-benefits__card kit-card kit-hover-lift" data-anim="fade-up" data-anim-delay="0.3">
+          <div class="kit-benefits__glow"></div>
+          <div class="kit-benefits__icon kit-icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3 class="kit-benefits__title kit-h4">Perfeito no celular</h3>
+          <p class="kit-benefits__desc kit-body-sm">Mais de 80% dos seus visitantes chegam pelo celular, a página é feita para eles primeiro.</p>
+        </div>
+
+        <div class="kit-benefits__card kit-card kit-hover-lift" data-anim="fade-up" data-anim-delay="0.4">
+          <div class="kit-benefits__glow"></div>
+          <div class="kit-benefits__icon kit-icon-wrapper">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="kit-benefits__title kit-h4">Entrega rápida</h3>
+          <p class="kit-benefits__desc kit-body-sm">Processo enxuto e direto: sua página fica pronta em dias, não em meses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 7: Oferta / Orçamento ═══ -->
+  <section id="oferta" class="kit-section kit-bg-deep page-pricing" data-anim="cta-section">
+    <div class="kit-bokeh-container" data-anim-bokeh="12"></div>
+
+    <div class="kit-container" style="position: relative; z-index: 2;">
+      <div class="page-pricing__card kit-card-glass" data-anim="fade-up" data-anim-delay="0.2">
+        <div class="page-pricing__header">
+          <span class="kit-label kit-label-alt">como contratar</span>
+          <h2 class="kit-h2">Seu projeto avaliado <span class="kit-text-gradient-blue">individualmente</span>, com orçamento justo:</h2>
+        </div>
+
+        <ul class="page-pricing__checklist">
+          <li class="page-pricing__check-item kit-body">
+            <span class="page-pricing__check-icon">✓</span>
+            Reunião de escopo direto no WhatsApp, você fala, a gente escuta
+          </li>
+          <li class="page-pricing__check-item kit-body">
+            <span class="page-pricing__check-icon">✓</span>
+            Orçamento transparente, sem taxa escondida e sem compromisso
+          </li>
+          <li class="page-pricing__check-item kit-body">
+            <span class="page-pricing__check-icon">✓</span>
+            Design, copy e estrutura pensados para o seu nicho
+          </li>
+          <li class="page-pricing__check-item kit-body">
+            <span class="page-pricing__check-icon">✓</span>
+            Ajustes incluídos até a aprovação final
+          </li>
+          <li class="page-pricing__check-item kit-body">
+            <span class="page-pricing__check-icon">✓</span>
+            Entrega pronta para o ar, funcionando em qualquer tela
+          </li>
+        </ul>
+
+        <div class="page-pricing__price-wrapper">
+          <span class="page-pricing__price-label kit-label">O INVESTIMENTO DEPENDE DO ESCOPO</span>
+          <span class="page-pricing__price kit-display kit-text-gradient-blue" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">Orçamento gratuito</span>
+        </div>
+
+        <a href="#" class="kit-btn-shiny" style="width: 100%; text-align: center;" data-wa>
+          Pedir meu orçamento pelo WhatsApp
+        </a>
+
+        <div class="page-pricing__guarantee">
+          <div class="page-pricing__guarantee-icon">🛡️</div>
+          <div>
+            <strong class="kit-h4">Sem risco nenhum</strong>
+            <p class="kit-body-sm">A conversa e a avaliação do seu projeto são totalmente gratuitas. Você só decide depois de ver a proposta, e pode não fechar, sem problema algum.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BLOCO 8: FAQ ═══ -->
+  <section id="faq" class="kit-section kit-faq kit-bg-dark" data-anim="faq-section">
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">dúvidas</span>
+        <h2 class="kit-h1">Perguntas frequentes</h2>
+      </div>
+
+      <div class="kit-faq__list">
+        <div class="kit-faq-item" data-anim="fade-up" data-anim-delay="0.05">
+          <button class="kit-faq-toggle" data-anim-faq aria-expanded="false">
+            <span class="kit-faq__question kit-h4">Quanto custa um site ou landing page?</span>
+            <span class="kit-faq-toggle__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="kit-faq-answer">
+            <div class="kit-faq-answer__inner kit-body">
+              Depende do escopo: quantidade de páginas, funcionalidades e urgência. Por isso o orçamento é feito caso a caso, direto no WhatsApp — rápido, gratuito e sem compromisso.
+            </div>
+          </div>
+        </div>
+
+        <div class="kit-faq-item" data-anim="fade-up" data-anim-delay="0.1">
+          <button class="kit-faq-toggle" data-anim-faq aria-expanded="false">
+            <span class="kit-faq__question kit-h4">Em quanto tempo fica pronto?</span>
+            <span class="kit-faq-toggle__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="kit-faq-answer">
+            <div class="kit-faq-answer__inner kit-body">
+              Landing pages costumam ficar prontas em poucos dias. Sites maiores variam conforme o escopo — o prazo exato vai na sua proposta, antes de qualquer pagamento.
+            </div>
+          </div>
+        </div>
+
+        <div class="kit-faq-item" data-anim="fade-up" data-anim-delay="0.15">
+          <button class="kit-faq-toggle" data-anim-faq aria-expanded="false">
+            <span class="kit-faq__question kit-h4">Vocês atendem qual nicho?</span>
+            <span class="kit-faq-toggle__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="kit-faq-answer">
+            <div class="kit-faq-answer__inner kit-body">
+              Praticamente todos: restaurantes, barbearias, prestadores de serviço, infoprodutores, clínicas, lojas e mais. Adaptamos o design e a comunicação ao seu público.
+            </div>
+          </div>
+        </div>
+
+        <div class="kit-faq-item" data-anim="fade-up" data-anim-delay="0.2">
+          <button class="kit-faq-toggle" data-anim-faq aria-expanded="false">
+            <span class="kit-faq__question kit-h4">Eu preciso entender de site ou design?</span>
+            <span class="kit-faq-toggle__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="kit-faq-answer">
+            <div class="kit-faq-answer__inner kit-body">
+              Não. Você só conta o que precisa pelo WhatsApp e acompanha o progresso. Toda a parte técnica, de design e de texto fica com a Base Code.
+            </div>
+          </div>
+        </div>
+
+        <div class="kit-faq-item" data-anim="fade-up" data-anim-delay="0.25">
+          <button class="kit-faq-toggle" data-anim-faq aria-expanded="false">
+            <span class="kit-faq__question kit-h4">Posso pedir mudanças depois de pronto?</span>
+            <span class="kit-faq-toggle__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="kit-faq-answer">
+            <div class="kit-faq-answer__inner kit-body">
+              Sim. Ajustes durante a criação estão inclusos até a sua aprovação final — a página só vai para o ar quando você estiver satisfeito.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer id="footer" class="kit-section kit-footer kit-bg-dark">
+    <div class="kit-container" style="text-align: center;">
+      <p class="kit-footer__copy kit-caption">
+        © 2026 Base Code. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ═══ Dependências CDN ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+  <!-- ═══ Animações do Kit ═══ -->
+  <script src="js/animations.js" defer></script>
+
+  <!-- ═══ Header liquid glass: scroll + menu mobile + link ativo ═══ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var header = document.getElementById('lgHeader');
+      var menu = document.getElementById('lgMenu');
+      var burger = document.getElementById('lgBurger');
+      var overlay = document.getElementById('lgOverlay');
+
+      // Estado "scrolled" para intensificar o glass
+      function onScroll() {
+        header.classList.toggle('scrolled', window.scrollY > 24);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Menu mobile
+      function closeMenu() {
+        menu.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+      burger.addEventListener('click', function () {
+        var open = !menu.classList.contains('open');
+        menu.classList.toggle('open', open);
+        overlay.classList.toggle('open', open);
+        burger.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open);
+      });
+      overlay.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+      // Link ativo conforme a seção visível
+      var links = Array.prototype.slice.call(menu.querySelectorAll('a[href^="#"]'));
+      var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+      if ('IntersectionObserver' in window && sections.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            links.forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+            });
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(function (s) { io.observe(s); });
+      }
+    });
+  </script>
+
+  <!-- ═══ WhatsApp: troque o número aqui ═══ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var WHATSAPP_NUMBER = '55SEUNUMERO'; // ex: 5511999999999
+      var WHATSAPP_MSG = 'Olá! Vim pelo site da Base Code e quero um orçamento para meu projeto.';
+      document.querySelectorAll('[data-wa]').forEach(function (a) {
+        a.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
+        a.target = '_blank';
+        a.rel = 'noopener';
+      });
+    });
+  </script>
+
+  <!-- ═══ Arco de imagens: pin + rotação com ScrollTrigger ═══ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var section = document.querySelector('.arco-section');
+      var panel = section && section.querySelector('.arco-panel');
+      var list = document.getElementById('arcoList');
+      if (!section || !panel || !list) return;
+
+      var cards = list.querySelectorAll('.arco-item');
+      var count = cards.length;
+      if (count < 2) return;
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var noGsap = !(window.gsap && window.ScrollTrigger);
+
+      // Fallback estático: grade legível, sem pin
+      if (reduced || noGsap) {
+        section.classList.add('arco-section--static');
+        cards.forEach(function (c) { c.style.transform = 'none'; });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Remove transforms inline residuais para começar sempre no card 1
+      cards.forEach(function (c) { c.removeAttribute('style'); });
+
+      function stepDeg() {
+        return window.innerWidth >= 1024 ? 24 : 14;
+      }
+
+      function applyCardTransforms() {
+        var cs = getComputedStyle(section);
+        var fontSize = parseFloat(getComputedStyle(list).fontSize);
+        var radius = parseFloat(cs.getPropertyValue('--arco-radius')) || 90;
+        var originY = (radius * fontSize) + 'px';
+        cards.forEach(function (card, i) {
+          card.style.setProperty('--card-index', i + 1);
+          card.style.transformOrigin = '50% ' + originY;
+          card.style.transform = 'rotate(calc(var(--arco-step) * ' + i + '))';
+        });
+        list.style.transformOrigin = '50% ' + originY;
+      }
+
+      function buildTrigger() {
+        var step = parseFloat(getComputedStyle(section).getPropertyValue('--arco-step')) || 24;
+        return gsap.fromTo(list,
+          { rotation: 0 },
+          {
+            rotation: -step * (count - 1),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: panel,
+              pin: true,
+              pinSpacing: true,
+              anticipatePin: 1,
+              start: 'top top',
+              end: '+=' + (window.innerHeight * (count - 1) * 0.6),
+              scrub: true,
+              invalidateOnRefresh: true
+            }
+          }
+        );
+      }
+
+      applyCardTransforms();
+      buildTrigger();
+
+      // Intro some com blur/fade assim que os cards começam a girar (1º→2º card)
+      var intro = section.querySelector('.arco-intro');
+      if (intro) {
+        gsap.fromTo(intro,
+          { opacity: 1, filter: 'blur(0px)' },
+          {
+            opacity: 0.06,
+            filter: 'blur(7px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: panel,
+              start: 'top top',
+              end: '+=' + (window.innerHeight * 0.45),
+              scrub: true
+            }
+          }
+        );
+      }
+
+      ScrollTrigger.addEventListener('refreshInit', applyCardTransforms);
+      // Recalcula o pin depois que imagens/fontes e o Swiper estabilizarem o layout
+      function refreshLater() {
+        ScrollTrigger.refresh();
+        setTimeout(ScrollTrigger.refresh, 500);
+        setTimeout(ScrollTrigger.refresh, 1500);
+      }
+      window.addEventListener('load', refreshLater);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+      }
+    });
+  </script>
+
+  <!-- ═══ TubesCursor — efeito de luz no hero ═══ -->
+  <script type="module">
+    const section = document.getElementById("tubes-section");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const allowTubes = !prefersReducedMotion;
+
+    let tubesStarted = false;
+
+    function scheduleIdle(task) {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(task, { timeout: 1800 });
+      } else {
+        setTimeout(task, 350);
+      }
+    }
+
+    async function startTubes() {
+      if (!section || tubesStarted || !allowTubes) return;
+
+      try {
+        const testCanvas = document.createElement("canvas");
+        const gl = testCanvas.getContext("webgl2") || testCanvas.getContext("webgl");
+        if (!gl) return;
+        const ext = gl.getExtension("WEBGL_lose_context");
+        if (ext) ext.loseContext();
+      } catch (e) {
+        return;
+      }
+
+      tubesStarted = true;
+
+      try {
+        const { default: TubesCursor } = await import("./js/tubes1.min.js");
+
+        const canvas = document.createElement("canvas");
+        canvas.id = "tubesCanvasSection";
+        canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;";
+        section.prepend(canvas);
+
+        function sizeCanvas() {
+          const rect = section.getBoundingClientRect();
+          canvas.width = rect.width * devicePixelRatio;
+          canvas.height = rect.height * devicePixelRatio;
+        }
+        sizeCanvas();
+        window.addEventListener("resize", sizeCanvas, { passive: true });
+
+        TubesCursor(canvas, {
+          bloom: {
+            threshold: 0.08,
+            strength: 1.05,
+            radius: 0.28
+          },
+          tubes: {
+            count: 12,
+            minRadius: 0.004,
+            maxRadius: 0.032,
+            colors: ["#0A74FF", "#0C9BFF", "#69C3FF"],
+            lights: {
+              intensity: 180,
+              colors: ["#4FC3FF", "#A8E4FF", "#0A74FF", "#0047FF"]
+            }
+          }
+        });
+
+        if ("PointerEvent" in window) {
+          const forwardTouchToPointer = (event) => {
+            const touch = event.touches && event.touches[0];
+            if (!touch) return;
+            const pointerMove = new PointerEvent("pointermove", {
+              bubbles: true,
+              cancelable: true,
+              clientX: touch.clientX,
+              clientY: touch.clientY,
+              pointerType: "touch",
+              isPrimary: true
+            });
+            document.body.dispatchEvent(pointerMove);
+          };
+          section.addEventListener("touchstart", forwardTouchToPointer, { passive: true });
+          section.addEventListener("touchmove", forwardTouchToPointer, { passive: true });
+        }
+
+        canvas.style.filter = "blur(0.2px) brightness(1)";
+      } catch (error) {
+        console.warn("TubesCursor init skipped:", error);
+      }
+    }
+
+    if (section && allowTubes) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries.some((entry) => entry.isIntersecting);
+          if (!visible) return;
+          observer.disconnect();
+          scheduleIdle(startTubes);
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(section);
+    }
+  </script>
+  <!-- ═══ Botão flutuante WhatsApp ═══ -->
+  <a href="#" class="wa-float" data-wa aria-label="Falar no WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+    <span class="wa-float__tip">Fale conosco no WhatsApp</span>
+  </a>
+
+</body>
+</html>

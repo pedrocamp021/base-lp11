@@ -1,0 +1,155 @@
+/* ============================================
+   Kit Visual: ferandrade-com-br
+   Arquivo: typography.css
+   Fontes e escala tipográfica
+   ============================================ */
+
+/* @import removidos: as fontes já são carregadas de forma assíncrona no <head> do HTML.
+   Manter @import aqui causava download duplicado + waterfall render-blocking
+   (HTML → CSS → @import → fonts.googleapis.com) */
+
+/* === Escala tipográfica === */
+
+.kit-display {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-display);
+  font-weight: var(--kit-fw-medium);
+  line-height: var(--kit-lh-tight);
+  letter-spacing: var(--kit-ls-heading);
+  color: var(--kit-text-heading);
+}
+
+.kit-watermark {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-hero-watermark);
+  font-weight: var(--kit-fw-bold);
+  line-height: 1;
+  color: var(--kit-text-subtle);
+  user-select: none;
+  pointer-events: none;
+}
+
+.kit-h1 {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-h1);
+  font-weight: var(--kit-fw-medium);
+  line-height: var(--kit-lh-heading);
+  letter-spacing: var(--kit-ls-heading);
+  color: var(--kit-text-heading);
+}
+
+.kit-h2 {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-h2);
+  font-weight: var(--kit-fw-regular);
+  line-height: var(--kit-lh-heading);
+  letter-spacing: var(--kit-ls-heading);
+  color: var(--kit-text-primary);
+}
+
+.kit-h3 {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-h3);
+  font-weight: var(--kit-fw-bold);
+  line-height: var(--kit-lh-heading);
+  letter-spacing: var(--kit-ls-label);
+  color: var(--kit-text-primary);
+}
+
+.kit-h4 {
+  font-family: var(--kit-font-heading);
+  font-size: var(--kit-fs-h4);
+  font-weight: var(--kit-fw-semibold);
+  line-height: var(--kit-lh-heading);
+  color: var(--kit-text-primary);
+}
+
+.kit-body-lg {
+  font-family: var(--kit-font-body);
+  font-size: var(--kit-fs-body-lg);
+  font-weight: var(--kit-fw-regular);
+  line-height: var(--kit-lh-body);
+  color: var(--kit-text-body);
+}
+
+.kit-body {
+  font-family: var(--kit-font-body);
+  font-size: var(--kit-fs-body);
+  font-weight: var(--kit-fw-regular);
+  line-height: var(--kit-lh-body);
+  color: var(--kit-text-body);
+}
+
+.kit-body-sm {
+  font-family: var(--kit-font-body);
+  font-size: var(--kit-fs-body-sm);
+  font-weight: var(--kit-fw-regular);
+  line-height: var(--kit-lh-body);
+  color: var(--kit-text-muted);
+}
+
+.kit-caption {
+  font-family: var(--kit-font-body);
+  font-size: var(--kit-fs-caption);
+  font-weight: var(--kit-fw-regular);
+  line-height: var(--kit-lh-body);
+  color: var(--kit-text-muted);
+}
+
+.kit-label {
+  font-family: var(--kit-font-accent);
+  font-size: var(--kit-fs-label);
+  font-weight: var(--kit-fw-regular);
+  line-height: 1;
+  letter-spacing: var(--kit-ls-label);
+  text-transform: uppercase;
+  color: var(--kit-text-primary);
+}
+
+.kit-label-alt {
+  font-family: var(--kit-font-alt);
+  font-size: var(--kit-fs-caption);
+  font-weight: var(--kit-fw-semibold);
+  line-height: 1.4;
+  color: var(--kit-text-primary);
+}
+
+/* === Estilos especiais de texto === */
+
+.kit-text-gradient {
+  background: var(--kit-gradient-heading);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kit-text-gradient-blue {
+  background: var(--kit-gradient-heading-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kit-text-metal {
+  background: var(--kit-gradient-metal);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: var(--kit-shadow-text-glow);
+  animation: kit-shine-metal 5s ease-in-out infinite alternate;
+}
+
+.kit-text-glow {
+  text-shadow: var(--kit-shadow-text-glow);
+}
+
+/* === Responsivo === */
+
+@media (max-width: 768px) {
+  .kit-display { font-size: clamp(2rem, 8vw, 3rem); }
+  .kit-h1 { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+  .kit-h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+  .kit-h3 { font-size: clamp(1.125rem, 4vw, 1.25rem); }
+  .kit-watermark { font-size: clamp(4rem, 20vw, 8rem); }
+}

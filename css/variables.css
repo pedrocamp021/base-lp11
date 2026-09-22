@@ -1,0 +1,178 @@
+/* ============================================
+   Kit Visual: ferandrade-com-br
+   Arquivo: variables.css
+   Todas as variáveis CSS com prefixo --kit-
+   ============================================ */
+
+:root {
+  /* === CORES === */
+  --kit-primary: #0A74FF;
+  --kit-primary-light: #4FA2FF;
+  --kit-primary-bright: #5EB4FF;
+  --kit-primary-soft: #4AB3FF;
+  --kit-primary-glow: rgba(10, 116, 255, 0.5);
+  --kit-primary-glow-strong: rgba(10, 116, 255, 0.8);
+  --kit-secondary: #B2FE02;
+  --kit-accent-cyan: #06DEF3;
+  --kit-accent-purple: #B60CD5;
+  --kit-accent-purple-light: #C392FF;
+
+  /* Backgrounds */
+  --kit-bg-primary: #000000;
+  --kit-bg-deep: #0a0f1c;
+  --kit-bg-navy: #0a1428;
+  --kit-bg-navy-mid: #0d1b3a;
+  --kit-bg-surface: rgb(0, 0, 5);
+
+  /* Texto */
+  --kit-text-primary: #FFFFFF;
+  --kit-text-heading: #F6FAFF;
+  --kit-text-body: #EEEEEE;
+  --kit-text-muted: #DDDDDD;
+  --kit-text-subtle: rgba(246, 250, 255, 0.06);
+
+  /* Borders */
+  --kit-border-subtle: rgba(255, 255, 255, 0.08);
+  --kit-border-glow: rgba(10, 116, 255, 0.3);
+
+  /* Overlays */
+  --kit-overlay-dark: rgba(0, 0, 0, 0.5);
+  --kit-overlay-light: rgba(255, 255, 255, 0.05);
+
+  /* Estado */
+  --kit-success: #00ffcc;
+  --kit-danger: rgb(239, 68, 68);
+
+  /* === GRADIENTES === */
+  --kit-gradient-heading: linear-gradient(180deg, #fff 0%, #C8CDD0 100%);
+  --kit-gradient-heading-blue: linear-gradient(90deg, #0A74FF, #4AB3FF);
+  --kit-gradient-metal: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(220, 220, 220, 0.9) 20%,
+    rgba(150, 150, 150, 0.9) 40%,
+    rgba(255, 255, 255, 0.9) 60%,
+    rgba(180, 180, 180, 0.8) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --kit-gradient-glow-line: linear-gradient(
+    to right,
+    rgba(10, 116, 255, 0) 0%,
+    rgba(10, 116, 255, 0.8) 50%,
+    rgba(10, 116, 255, 0) 100%
+  );
+  --kit-gradient-glow-line-strong: linear-gradient(
+    to right,
+    rgba(10, 116, 255, 0) 0%,
+    rgba(10, 116, 255, 0.9) 50%,
+    rgba(10, 116, 255, 0) 100%
+  );
+  --kit-gradient-bg-tech: radial-gradient(
+    circle at 30% 120%,
+    rgba(15, 20, 35, 0.9) 0%,
+    rgba(10, 12, 18, 0.95) 80%
+  );
+  --kit-gradient-bg-section: radial-gradient(
+    circle at top left,
+    #0a1428 0%,
+    #0d1b3a 60%,
+    #0a0f1c 100%
+  );
+  --kit-gradient-card-glass: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0.00) 100%
+  );
+  --kit-gradient-card-shine: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --kit-gradient-noise: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 0%, transparent 60%),
+    radial-gradient(circle at 90% 90%, rgba(255,255,255,0.04) 0%, transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.01) 2px, rgba(0,0,0,0) 4px);
+  --kit-gradient-icon: linear-gradient(145deg, #e2e8f0, #94a3b8);
+  --kit-gradient-purple: linear-gradient(230deg, rgba(182,12,213,1) 25%, rgba(195,146,255,1) 100%);
+  --kit-gradient-cyan: linear-gradient(135deg, rgba(6,222,243,1) 0%, rgba(9,196,255,1) 100%);
+  --kit-gradient-blue-orb: linear-gradient(135deg, rgba(120,180,255,0.8) 0%, rgba(40,110,255,0.6) 40%, rgba(255,255,255,0.1) 100%);
+
+  /* === TIPOGRAFIA === */
+  --kit-font-heading: 'Figtree', sans-serif;
+  --kit-font-body: 'Figtree', sans-serif;
+  --kit-font-accent: 'DM Sans', sans-serif;
+  --kit-font-alt: 'Manrope', sans-serif;
+
+  --kit-fs-display: clamp(3rem, 5vw + 1rem, 4rem);
+  --kit-fs-hero-watermark: clamp(8rem, 15vw, 15.5rem);
+  --kit-fs-h1: clamp(2.5rem, 4vw + 1rem, 3.5rem);
+  --kit-fs-h2: clamp(2rem, 3vw + 0.5rem, 3.375rem);
+  --kit-fs-h3: clamp(1.25rem, 2vw + 0.5rem, 1.5rem);
+  --kit-fs-h4: clamp(1.125rem, 1.5vw + 0.25rem, 1.25rem);
+  --kit-fs-body-lg: 1.25rem;
+  --kit-fs-body: 1.125rem;
+  --kit-fs-body-sm: 1rem;
+  --kit-fs-caption: 0.875rem;
+  --kit-fs-label: 0.75rem;
+
+  --kit-fw-light: 300;
+  --kit-fw-regular: 400;
+  --kit-fw-medium: 500;
+  --kit-fw-semibold: 600;
+  --kit-fw-bold: 700;
+  --kit-fw-extrabold: 800;
+
+  --kit-lh-heading: 1.2;
+  --kit-lh-body: 1.5;
+  --kit-lh-tight: 1.15;
+  --kit-ls-heading: 0.3px;
+  --kit-ls-label: 0.1px;
+
+  /* === ESPAÇAMENTO === */
+  --kit-section-py: clamp(4rem, 8vw, 7rem);
+  --kit-section-px: clamp(1rem, 3vw, 2rem);
+  --kit-container-max: 1140px;
+  --kit-container-wide: 1200px;
+  --kit-gap-xl: 3rem;
+  --kit-gap-lg: 2rem;
+  --kit-gap-md: 1.25rem;
+  --kit-gap-sm: 0.75rem;
+  --kit-gap-xs: 0.5rem;
+  --kit-card-padding: 1.5rem;
+  --kit-block-gap: 1.5rem;
+
+  /* === BORDAS === */
+  --kit-radius-xs: 8px;
+  --kit-radius-sm: 12px;
+  --kit-radius-md: 16px;
+  --kit-radius-lg: 20px;
+  --kit-radius-xl: 24px;
+  --kit-radius-full: 9999px;
+  --kit-border-width: 1px;
+  --kit-border-color: rgba(255, 255, 255, 0.08);
+
+  /* === SOMBRAS === */
+  --kit-shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --kit-shadow-card-hover: 0 0 20px 5px rgba(148, 163, 184, 0.2);
+  --kit-shadow-glow-sm: 0 0 8px rgba(10, 116, 255, 0.5), 0 0 20px rgba(10, 116, 255, 0.25);
+  --kit-shadow-glow-md: 0 0 12px rgba(10, 116, 255, 0.8), 0 0 28px rgba(10, 116, 255, 0.4), 0 0 60px rgba(10, 116, 255, 0.25);
+  --kit-shadow-glow-lg: 0 0 25px 8px rgba(10, 116, 255, 0.4);
+  --kit-shadow-inner-glass: inset 0 0 12px rgba(255, 255, 255, 0.05), 0 0 25px rgba(0, 122, 255, 0.15);
+  --kit-shadow-box-metal: 0 6px 24px rgba(10,116,255,0.08), inset 0 1px 0 rgba(255,255,255,0.03);
+  --kit-shadow-text-glow: 0 0 8px rgba(255, 255, 255, 0.25), 0 0 20px rgba(255, 255, 255, 0.05);
+  --kit-shadow-circle-hover: 0 0 20px rgba(52, 132, 247, 0.4);
+
+  /* === TIMING === */
+  --kit-transition-fast: 0.2s ease;
+  --kit-transition-base: 0.3s ease;
+  --kit-transition-slow: 0.5s ease;
+  --kit-transition-card: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s;
+
+  /* === SHINY CTA BUTTON === */
+  --kit-shiny-bg: #0a0f1c;
+  --kit-shiny-highlight: rgba(10, 116, 255, 0.6);
+  --kit-shiny-shine: rgba(79, 162, 255, 0.3);
+  --kit-shiny-gradient-percent: 10%;
+  --kit-shiny-gradient-offset: 0deg;
+}

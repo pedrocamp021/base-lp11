@@ -1,0 +1,247 @@
+/* ============================================
+   Kit Visual: ferandrade-com-br
+   Arquivo: animations.css
+   @keyframes + classes de animação
+   ============================================ */
+
+/* === Keyframes Principais === */
+
+@keyframes kit-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes kit-fade-in-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes kit-fade-in-right {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes kit-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* === Animações de Glow/Pulsação === */
+
+@keyframes kit-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes kit-pulse-effect {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes kit-wave {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes kit-glow-flow {
+  0% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.05); }
+  100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+}
+
+@keyframes kit-blue-pulse {
+  0% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.05); }
+  100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+}
+
+@keyframes kit-line-glow {
+  0%, 100% { opacity: 0.9; }
+  50%       { opacity: 1;   }
+  /* box-shadow mantida estática no elemento — animar box-shadow é não-composta (causa repaint) */
+}
+
+/* === Animações de Metal/Shine === */
+
+@keyframes kit-shine-metal {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes kit-rotate-glow {
+  to { --gradient-angle: 360deg; }
+}
+
+@keyframes kit-subtle-shine {
+  to { transform: rotate(360deg); }
+}
+
+/* === Animações de Flutuação === */
+
+@keyframes kit-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes kit-bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* === Scroll Marquee === */
+
+@keyframes kit-scroll-left {
+  from { transform: translateX(0%); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes kit-scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
+}
+
+/* === Animated Meter === */
+
+@keyframes kit-fill-meter {
+  /* scaleX é composta (GPU) — width causa layout/repaint */
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* === Border Flow === */
+
+@keyframes kit-border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Bokeh / Partículas === */
+
+@keyframes kit-drift {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes kit-flash {
+  /* Anima apenas opacity (GPU-composta) — box-shadow estática no elemento */
+  0%, 30%, 100% { opacity: 0;   }
+  35%, 60%      { opacity: 0.8; }
+}
+
+/* === Classes de Animação Disparáveis === */
+
+.kit-anim-fade-in-up {
+  animation: kit-fade-in-up 0.6s ease-out forwards;
+}
+
+.kit-anim-fade-in-left {
+  animation: kit-fade-in-left 0.6s ease-out forwards;
+}
+
+.kit-anim-fade-in-right {
+  animation: kit-fade-in-right 0.6s ease-out forwards;
+}
+
+.kit-anim-slide-in {
+  animation: kit-slide-in 0.5s ease-out forwards;
+}
+
+.kit-anim-pulse {
+  animation: kit-pulse 2s infinite ease-in-out;
+}
+
+.kit-anim-float {
+  animation: kit-float 6s ease-in-out infinite;
+}
+
+.kit-anim-bounce-arrow {
+  animation: kit-bounce-arrow 1.5s infinite ease-in-out;
+}
+
+.kit-anim-glow-flow {
+  animation: kit-glow-flow 6s ease-in-out infinite alternate;
+}
+
+/* === Estados para Animações on-scroll === */
+
+[data-anim] {
+  opacity: 0;
+}
+
+[data-anim].kit-visible {
+  opacity: 1;
+}
+
+/* === @property para gradient-angle (Shiny Button) === */
+
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* === Reveal directions (scroll-triggered) === */
+
+.kit-reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  filter: blur(10px);
+  transition: 0.8s ease all;
+}
+
+.kit-reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  filter: blur(10px);
+  transition: 0.8s ease all;
+}
+
+.kit-reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(10px);
+  transition: 0.8s ease all;
+}
+
+.kit-reveal-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  filter: blur(10px);
+  transition: 0.8s ease all;
+}
+
+.kit-reveal-left.kit-active,
+.kit-reveal-right.kit-active,
+.kit-reveal-up.kit-active,
+.kit-reveal-down.kit-active {
+  opacity: 1;
+  transform: translate(0);
+  filter: blur(0);
+}

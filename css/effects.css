@@ -1,0 +1,243 @@
+/* ============================================
+   Kit Visual: ferandrade-com-br
+   Arquivo: effects.css
+   Filtros, backdrop-filter, clip-path,
+   pseudo-elementos decorativos
+   ============================================ */
+
+/* === Glassmorphism === */
+
+.kit-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.kit-glass-strong {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Glow Line (separador luminoso) === */
+
+.kit-glow-line {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 2px;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--kit-color-primary) 30%,
+    var(--kit-color-primary-glow) 50%,
+    var(--kit-color-primary) 70%,
+    transparent
+  );
+  border-radius: 999px;
+  /* box-shadow estática (não animada) — evita repaint no keyframe */
+  box-shadow:
+    0 0 10px rgba(10, 116, 255, 0.65),
+    0 0 24px rgba(10, 116, 255, 0.32),
+    0 0 50px rgba(10, 116, 255, 0.2);
+  animation: kit-line-glow 4s ease-in-out infinite;
+  will-change: opacity;
+}
+
+.kit-glow-line::before {
+  content: "";
+  position: absolute;
+  inset: -4px -8px;
+  background: inherit;
+  filter: blur(8px);
+  opacity: 0.4;
+  border-radius: 999px;
+}
+
+/* === Neon Glow Box === */
+
+.kit-glow-box {
+  box-shadow:
+    0 0 8px rgba(10, 116, 255, 0.15),
+    0 0 20px rgba(10, 116, 255, 0.08);
+}
+
+.kit-glow-box-strong {
+  box-shadow:
+    0 0 15px rgba(10, 116, 255, 0.3),
+    0 0 40px rgba(10, 116, 255, 0.12),
+    0 0 60px rgba(10, 116, 255, 0.06);
+}
+
+/* === Noise/Grain Overlay === */
+
+.kit-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* === Drop Shadow (imagens flutuantes) === */
+
+.kit-drop-shadow {
+  filter: drop-shadow(0 15px 35px rgba(10, 116, 255, 0.2));
+}
+
+.kit-drop-shadow-dark {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* === Vignette (gradient escuro nas bordas) === */
+
+.kit-vignette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === Blue Ambient Light (pseudo-elemento de glow ambiental) === */
+
+.kit-ambient-glow::before {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 200px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse,
+    rgba(10, 116, 255, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: kit-blue-pulse 6s ease-in-out infinite alternate;
+}
+
+/* === Bokeh Particles Container === */
+
+.kit-bokeh-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kit-bokeh-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(188, 207, 255, 0.1);
+  will-change: transform;
+  animation: kit-drift 20s linear infinite;
+}
+
+.kit-bokeh-particle:nth-child(odd) {
+  background: rgba(10, 116, 255, 0.08);
+}
+
+.kit-bokeh-particle--flash {
+  /* box-shadow estática (não animada) — animar box-shadow causa repaint */
+  box-shadow: 0 0 3vw 1.5vw #BCCFFF;
+  will-change: opacity;
+  animation: kit-flash 8s ease-in-out infinite;
+}
+
+/* === Mix Blend Mode === */
+
+.kit-blend-screen {
+  mix-blend-mode: screen;
+}
+
+.kit-blend-overlay {
+  mix-blend-mode: overlay;
+}
+
+/* === Clip Path (recorte angular) === */
+
+.kit-clip-slant-top {
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+}
+
+.kit-clip-slant-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+/* === Gradient Overlay (seções) === */
+
+.kit-gradient-overlay-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, var(--kit-color-bg-dark), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kit-gradient-overlay-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--kit-color-bg-dark), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === Image Hover Effects === */
+
+.kit-img-hover-zoom {
+  overflow: hidden;
+}
+
+.kit-img-hover-zoom img {
+  transition: transform 0.4s ease;
+}
+
+.kit-img-hover-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* === Card Hover Lift === */
+
+.kit-hover-lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.kit-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 32px rgba(10, 116, 255, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* === Responsive === */
+
+@media (max-width: 767px) {
+  .kit-glow-line {
+    max-width: 200px;
+  }
+
+  .kit-ambient-glow::before {
+    width: 70%;
+    height: 120px;
+    filter: blur(40px);
+  }
+}
