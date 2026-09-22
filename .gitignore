@@ -9,3 +9,5 @@ Thumbs.db
 # Dependências/ambientes
 node_modules/
 __pycache__/
+
+.vercel
