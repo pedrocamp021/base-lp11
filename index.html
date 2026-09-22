@@ -117,6 +117,10 @@
     }
     .lg-menu a:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
     .lg-menu a.active { color: var(--kit-color-blue-light, #4fc3ff); background: rgba(10, 116, 255, 0.12); }
+    /* No desktop o menu não repete o CTA (ele já fica à direita) */
+    @media (min-width: 900px) {
+      .lg-menu .lg-cta { display: none !important; }
+    }
     .lg-cta {
       padding: 0.44rem 1.15rem;
       border-radius: 999px;
