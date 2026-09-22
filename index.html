@@ -599,6 +599,30 @@
       .arco-section { overflow-x: clip !important; }
     }
 
+    /* ═══ MARQUEE DE SCROLL (portfólio) ═══ */
+    .portfolio-marquee {
+      display: flex; flex-direction: column; gap: 12px;
+      overflow: hidden;
+      padding-bottom: 0.5rem;
+    }
+    .marquee-row { overflow: visible; }
+    .marquee-track {
+      display: flex; gap: 12px;
+      width: max-content;
+      will-change: transform;
+    }
+    .marquee-tile {
+      flex-shrink: 0;
+      width: min(420px, 78vw);
+      aspect-ratio: 420 / 270;
+      height: auto;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
+      background: #0a0f1c;
+    }
+
     /* HERO */
     #tubes-section {
       padding-top: 0 !important;
@@ -747,55 +771,36 @@
         <h2 class="kit-h1">Projetos que já <span class="kit-text-gradient-blue">estão no AR</span></h2>
       </div>
 
-      <div class="kit-portfolio__carousel swiper" data-anim-swiper data-anim="fade-up" data-anim-delay="0.2">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide kit-portfolio__slide">
-            <div class="kit-card">
-              <div class="kit-portfolio__video">
-                <iframe
-                  src="https://player.vimeo.com/video/1229036616?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;quality=1080p"
-                  title="Modelo de landing page criado pela Base Code"
-                  frameborder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  playsinline
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  loading="lazy"></iframe>
-              </div>
-              <div class="kit-portfolio__caption">
-                <h3 class="kit-h4">Landing Page de Conversão</h3>
-                <p class="kit-body-sm">Veja um dos modelos em ação</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide kit-portfolio__slide">
-            <div class="kit-card kit-img-hover-zoom">
-              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 2" loading="lazy" width="1439" height="757" decoding="async" />
-              <div class="kit-portfolio__caption">
-                <h3 class="kit-h4">Site Institucional</h3>
-                <p class="kit-body-sm">Presença digital que gera credibilidade para sua marca</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide kit-portfolio__slide">
-            <div class="kit-card kit-img-hover-zoom">
-              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 3" loading="lazy" width="1439" height="757" decoding="async" />
-              <div class="kit-portfolio__caption">
-                <h3 class="kit-h4">Página de Serviço</h3>
-                <p class="kit-body-sm">Apresente sua oferta com clareza e profissionalismo</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide kit-portfolio__slide">
-            <div class="kit-card kit-img-hover-zoom">
-              <img class="kit-portfolio__image" src="images/01.png" alt="Projeto Base Code 4" loading="lazy" width="1439" height="757" decoding="async" />
-              <div class="kit-portfolio__caption">
-                <h3 class="kit-h4">Menu Digital / Restaurante</h3>
-                <p class="kit-body-sm">Seu cardápio e reservas em um link que vende mais</p>
-              </div>
-            </div>
+      <div class="portfolio-marquee" data-anim="fade-up" data-anim-delay="0.2">
+        <div class="marquee-row" data-marquee-dir="right">
+          <div class="marquee-track">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — portfólio" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site de agendamento" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page de captura" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço 2" loading="lazy" decoding="async">
           </div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="marquee-row" data-marquee-dir="left">
+          <div class="marquee-track">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 3" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 3" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço 3" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — portfólio 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site de agendamento 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page de captura 2" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 4" loading="lazy" decoding="async">
+            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 4" loading="lazy" decoding="async">
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1273,6 +1278,47 @@
         a.rel = 'noopener';
       });
     });
+  </script>
+
+  <!-- ═══ Marquee de scroll: 2 fileiras em direções opostas ═══ -->
+  <script>
+    (function () {
+      var section = document.getElementById('modelos');
+      if (!section) return;
+      var tracks = section.querySelectorAll('.marquee-track');
+      if (!tracks.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Triplica o conteúdo para loop perfeito (como no prompt de referência)
+      tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
+
+      var sectionTop = 0;
+      function measure() {
+        sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      }
+
+      function update() {
+        var o = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+        tracks.forEach(function (t) {
+          var dir = t.parentElement.getAttribute('data-marquee-dir');
+          var x = dir === 'left' ? -(o - 200) : (o - 200);
+          t.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+        });
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(function () { update(); ticking = false; });
+        }
+      }, { passive: true });
+      window.addEventListener('resize', function () { measure(); update(); }, { passive: true });
+
+      measure();
+      update();
+      window.addEventListener('load', function () { measure(); update(); });
+    })();
   </script>
 
   <!-- ═══ Arco de imagens: pin + rotação com ScrollTrigger ═══ -->
