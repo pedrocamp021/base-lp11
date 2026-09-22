@@ -12,8 +12,8 @@
   <!-- Fontes: preconnect para liberar handshake TLS cedo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Figtree:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Figtree:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
 
   <!-- CSS crítico -->
   <link rel="stylesheet" href="css/variables.css">
@@ -62,7 +62,7 @@
     }
     .lg-logo {
       display: flex; align-items: center; gap: 0.55rem;
-      font-family: 'Figtree', sans-serif; font-weight: 800; font-size: 1rem;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem;
       letter-spacing: -0.02em; white-space: nowrap;
     }
     .lg-logo__mark {
@@ -124,7 +124,7 @@
     .lg-cta {
       padding: 0.44rem 1.15rem;
       border-radius: 999px;
-      font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.86rem;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.86rem;
       color: #fff; white-space: nowrap;
       background: linear-gradient(120deg, #0a74ff, #0c9bff);
       box-shadow: 0 4px 18px rgba(10, 116, 255, 0.4);
@@ -528,7 +528,7 @@
       right: 70px; top: 50%;
       transform: translateY(-50%);
       white-space: nowrap;
-      font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; font-weight: 600;
       color: #f2f6fc;
       background: rgba(10, 15, 28, 0.85);
       border: 1px solid rgba(79, 195, 255, 0.3);
@@ -621,6 +621,55 @@
       border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
       background: #0a0f1c;
+    }
+
+    /* ═══ DEPOIMENTOS ═══ */
+    .depo-section { background: var(--bg-deep); }
+    .dep-swiper { overflow: hidden; padding-bottom: 3.2rem; }
+    .dep-card {
+      height: 100%;
+      display: flex; flex-direction: column; gap: 1.1rem;
+      padding: 1.8rem 1.6rem;
+      background: linear-gradient(135deg, #0d1526 0%, #0a0f1c 55%, #0d1f3a 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .35s ease, box-shadow .35s ease;
+    }
+    .dep-card::before {
+      content: '';
+      position: absolute; top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    }
+    .dep-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79, 195, 255, 0.4);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 44px rgba(10, 116, 255, 0.14);
+    }
+    .dep-stars { color: #4fc3ff; letter-spacing: 0.2em; font-size: 0.95rem; }
+    .dep-text { color: var(--text-secondary); font-size: 0.98rem; line-height: 1.6; flex: 1; }
+    .dep-person { display: flex; align-items: center; gap: 0.8rem; }
+    .dep-avatar {
+      width: 44px; height: 44px; flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem;
+      color: #bfe4ff;
+      background: linear-gradient(160deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 45%), linear-gradient(180deg, #1c4d8f 0%, #0b2a55 100%);
+      border: 1px solid rgba(127, 199, 255, 0.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 5px rgba(0,8,24,0.6), 0 3px 10px rgba(10,116,255,0.3);
+    }
+    .dep-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: #f2f6fc; }
+    .dep-role { font-size: 0.8rem; color: var(--text-muted); }
+    .dep-swiper .swiper-pagination { position: static; margin-top: 0.4rem; }
+    .dep-swiper .swiper-pagination-bullet { background: rgba(255,255,255,0.3); opacity: 1; }
+    .dep-swiper .swiper-pagination-bullet-active { background: var(--blue-light, #4fc3ff); }
+    @media (max-width: 767px) {
+      .dep-card { padding: 1.4rem 1.2rem; }
+      .dep-text { font-size: 0.92rem; }
     }
 
     /* HERO */
@@ -1060,6 +1109,84 @@
   </section>
 
 
+  <!-- ═══ BLOCO 6.5: DEPOIMENTOS ═══ -->
+  <section id="depoimentos" class="section lazy-section depo-section">
+    <div class="kit-separator"></div>
+    <div class="kit-container">
+      <div class="kit-section-header" data-anim="fade-up">
+        <span class="kit-label kit-label-alt">depoimentos</span>
+        <h2 class="kit-h1">Quem contratou, <span class="kit-text-gradient-blue">recomendou</span>.</h2>
+      </div>
+
+      <div class="dep-swiper swiper" data-anim="fade-up" data-anim-delay="0.15">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"O site ficou pronto em menos de uma semana e minhas clientes elogiam toda hora. Parece que a clínica dobrou de tamanho só pela página."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">ML</span>
+                <div><div class="dep-name">Mariana Lima</div><div class="dep-role">Clínica de Estética</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"Coloquei o link da landing page na bio do Instagram e em duas semanas dobrei os agendamentos. Melhor investimento que fiz esse ano."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">RS</span>
+                <div><div class="dep-name">Rafael Souza</div><div class="dep-role">Barbearia Navalha de Ouro</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"Profissionalismo do início ao fim. Me explicaram tudo pelo WhatsApp, o orçamento foi justo e o resultado ficou melhor do que eu imaginava."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">CM</span>
+                <div><div class="dep-name">Dr. Carlos Menezes</div><div class="dep-role">Consultório Odontológico</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"Meu site antigo parecia amador e eu tinha vergonha de compartilhar. Agora passo o link pra todo mundo. O celular deles é impecável."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">AF</span>
+                <div><div class="dep-name">Amanda Ferreira</div><div class="dep-role">Studio de Pilates</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"Passei o que eu queria pelo WhatsApp e eles resolveram todo o resto. Site direto ao ponto, que passa confiança e já tá trazendo clientes."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">LP</span>
+                <div><div class="dep-name">Lucas Prado</div><div class="dep-role">Advogado</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="dep-card">
+              <div class="dep-stars">★★★★★</div>
+              <p class="dep-text">"As vendas pela página aumentaram muito. O design é lindo e as pessoas acham que paguei uma fortuna, e nem foi o caso."</p>
+              <div class="dep-person">
+                <span class="dep-avatar">JC</span>
+                <div><div class="dep-name">Juliana Castro</div><div class="dep-role">Loja de Acessórios</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ═══ BLOCO 7: Oferta / Orçamento ═══ -->
   <section id="oferta" class="kit-section kit-bg-deep page-pricing" data-anim="cta-section">
     <div class="kit-bokeh-container" data-anim-bokeh="12"></div>
@@ -1276,6 +1403,26 @@
         a.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
         a.target = '_blank';
         a.rel = 'noopener';
+      });
+    });
+  </script>
+
+  <!-- ═══ Depoimentos: carrossel com autoplay + swipe ═══ -->
+  <script>
+    window.addEventListener('load', function () {
+      if (typeof Swiper === 'undefined') return;
+      new Swiper('.dep-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        grabCursor: true,
+        speed: 700,
+        autoplay: { delay: 3800, disableOnInteraction: false, pauseOnMouseEnter: true },
+        pagination: { el: '.dep-swiper .swiper-pagination', clickable: true },
+        breakpoints: {
+          768: { slidesPerView: 2, spaceBetween: 24 },
+          1024: { slidesPerView: 3, spaceBetween: 24 }
+        }
       });
     });
   </script>
