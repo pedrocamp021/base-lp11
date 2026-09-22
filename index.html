@@ -32,6 +32,12 @@
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
   <style>
+    /* Trava pan horizontal global (mobile arrastando pro lado) */
+    html, body { overflow-x: hidden; max-width: 100%; }
+    @supports (overflow-x: clip) {
+      html, body { overflow-x: clip; }
+    }
+
     /* ═══ LIQUID GLASS HEADER ═══ */
     .lg-header {
       position: fixed;
@@ -580,9 +586,13 @@
       .arco-section--static .arco-card { border-radius: 16px !important; aspect-ratio: 16 / 9 !important; }
       .arco-section--static .arco-card__title { font-size: 1.3rem !important; padding: 0 1.1rem 1.1rem !important; }
       [data-anim="fade-left"], [data-anim="fade-right"], [data-anim="fade-up"] { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .swiper { overflow: visible !important; }
+      .swiper { overflow: hidden !important; }
       .swiper-pagination { display: block !important; }
       .wa-float { right: 16px !important; bottom: 16px !important; width: 50px !important; height: 50px !important; }
+      /* Trava o pan horizontal: nada pode arrastar a tela pro lado */
+      section#tubes-section { overflow-x: clip !important; }
+      .kit-hero__watermark { font-size: 34vw !important; }
+      .arco-section { overflow-x: clip !important; }
     }
 
     /* HERO */
