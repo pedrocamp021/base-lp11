@@ -190,145 +190,108 @@
       contain-intrinsic-size: auto 600px;
     }
 
-    /* ═══ SEÇÃO ARCO DE IMAGENS ═══ */
-    .arco-section {
-      --arco-bg: #080c16;
-      --arco-card-size: 19.6875rem;
-      --arco-step: 14deg;
-      --arco-radius: 82em;
-      --arco-card-radius: 16px;
-      background: var(--arco-bg);
+    /* ═══ SEÇÃO CARDS EMPILHADOS (flick cards) ═══ */
+    .flick-section {
+      background: #000;
       overflow: hidden;
-    }
-    .arco-panel {
+      padding: 5.5rem 0 6rem;
       position: relative;
-      height: 100svh;
-      min-height: 520px;
-      display: flex; flex-direction: column;
-      justify-content: space-between;
-      padding: min(4.25rem, 6.5vh) 0 min(2.5rem, 6vh);
-      gap: min(1.5rem, 3vh);
+      z-index: 0;
     }
-    .arco-panel::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 5rem;
-      background: linear-gradient(to bottom, transparent, var(--arco-bg));
-      pointer-events: none; z-index: 1;
+    .flick-container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 2.5rem;
     }
-    .arco-intro { max-width: var(--container); margin: 0 auto; padding: 0 1.5rem; width: 100%; }
-    .arco-intro .kit-label { display: inline-block; margin: 0 0 0.75rem; }
-    .arco-heading {
+    .flick-intro { text-align: center; max-width: 760px; }
+    .flick-intro .kit-label { display: inline-block; margin-bottom: 0.75rem; }
+    .flick-heading {
       margin: 0;
       font-family: var(--font-display); font-weight: 800;
-      font-size: min(clamp(3.125rem, 2.4rem + 3.35vw, 6.875rem), 9vh);
-      line-height: 1.05; letter-spacing: -0.02em;
-      text-indent: -0.065em;
+      font-size: clamp(2.25rem, 1.8rem + 2.2vw, 4.25rem);
+      line-height: 1.08; letter-spacing: -0.02em;
     }
-    @media (max-width: 767px) {
-      .arco-heading { text-indent: 0; }
-      .arco-lead { font-size: 1rem !important; line-height: 1.55 !important; }
-      .arco-intro .kit-label { margin-bottom: 0.5rem !important; }
-      #urgencia { margin-top: 0 !important; border-radius: 0 !important; background: #000 !important; }
-    }
-    .arco-lead {
+    .flick-lead {
       margin: 1rem 0 0;
-      font-size: min(clamp(1.75rem, 1.62rem + 0.55vw, 2.125rem), 4vh);
-      line-height: 1.2; letter-spacing: -0.02em;
+      font-size: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
+      line-height: 1.5; letter-spacing: -0.01em;
       color: var(--text-secondary);
-      max-width: 900px;
     }
-    .arco-stage {
-      flex: 1;
-      display: flex; align-items: flex-end; justify-content: center;
-      width: 100%;
-      min-height: 0;
+    .flick-hint {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
     }
-    .arco-collection { width: min(var(--arco-card-size), 64vh); }
-    .arco-list {
-      display: grid; list-style: none;
-      transform-origin: 50% var(--arco-radius);
-    }
-    .arco-item {
-      grid-area: 1 / 1;
-      transform: rotate(calc(var(--arco-step) * (var(--card-index) - 1)));
-      transform-origin: 50% var(--arco-radius);
-      will-change: transform;
-    }
-    .arco-card {
+    /* Palco: dá altura ao leque de cards */
+    .flick-stage {
       position: relative;
-      aspect-ratio: 4 / 3;
-      width: 100%;
-      border-radius: var(--arco-card-radius);
+      width: min(30rem, 82vw);
+      height: min(30rem, 58vh);
+      min-height: 22rem;
+      touch-action: pan-y;
+    }
+    .flick-stage[data-flick-drag-status="grabbing"] { cursor: grabbing; }
+    .flick-card {
+      position: absolute;
+      top: 0; left: 50%;
+      width: min(18rem, 62vw);
+      height: 100%;
+      margin-left: calc(min(18rem, 62vw) / -2);
+      border-radius: 1em;
       overflow: hidden;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      background: var(--bg-navy);
+      background: #0a0f1c;
       border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow:
         0 0 0 1px rgba(10, 116, 255, 0.18),
         0 24px 70px rgba(0, 0, 0, 0.55),
         0 0 42px rgba(10, 116, 255, 0.12);
+      will-change: transform, opacity;
+      user-select: none;
+      transform: translateZ(0);
     }
-    .arco-card img {
+    .flick-card img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       pointer-events: none;
-      border-radius: inherit;
     }
-    .arco-card::before {
+    .flick-card::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,12,24,0.05) 35%, rgba(8,12,24,0.45) 70%, rgba(4,6,12,0.88) 100%);
+      background: linear-gradient(to bottom, rgba(8,12,24,0.05) 40%, rgba(8,12,24,0.45) 72%, rgba(4,6,12,0.88) 100%);
       pointer-events: none;
-      border-radius: inherit;
     }
-    .arco-card__title {
+    .flick-card__title {
       margin: 0;
-      position: relative; z-index: 2;
-      padding: 0 1.5rem 1.5rem;
+      position: absolute; left: 0; right: 0; bottom: 1.1rem; z-index: 2;
+      padding: 0 1.25rem;
       font-family: var(--font-display); font-weight: 700;
-      font-size: clamp(1.375rem, 1.2rem + 0.77vw, 2.875rem); line-height: 0.9; letter-spacing: -0.04em;
+      font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+      line-height: 1; letter-spacing: -0.03em;
       color: #f2f6fc;
-      text-wrap: balance;
+      text-shadow: 0 0 2rem rgba(0, 0, 0, 0.45);
+      pointer-events: none;
     }
-    /* fallback sem movimento (reduced-motion / JS off) */
-    .arco-section--static .arco-panel { height: auto; min-height: 0; padding: 4.5rem 0 4rem; }
-    .arco-section--static .arco-collection { width: 100%; }
-    .arco-section--static .arco-list {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-      transform: none !important;
-      width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 1.5rem;
+    .flick-card__dragger {
+      position: absolute; inset: 0;
+      z-index: 8;
+      cursor: grab;
+      touch-action: pan-y;
     }
-    .arco-section--static .arco-item { transform: none; }
-    @media (min-width: 768px) {
-      .arco-panel { padding-top: min(4.25rem, 6.5vh); padding-bottom: min(2.5rem, 5vh); gap: min(2.5rem, 4vh); }
-      .arco-panel::after { height: 8rem; }
-      .arco-section { --arco-radius: 90em; }
-      .arco-card__title { font-size: 1.5rem; }
+    /* fallback sem movimento (reduced-motion / sem GSAP) */
+    .flick-section--static .flick-stage {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; width: 100%; height: auto; min-height: 0;
     }
-    @media (min-width: 1024px) {
-      .arco-section { --arco-card-size: 36rem; --arco-step: 24deg; }
-      .arco-panel { gap: min(3.75rem, 6vh); }
-      .arco-card__title { font-size: min(clamp(2.5rem, 2.01rem + 0.77vw, 2.875rem), 6vh); }
+    .flick-section--static .flick-card {
+      position: relative; left: auto; top: auto; margin: 0;
+      aspect-ratio: 3 / 4; height: auto;
     }
     @media (max-width: 767px) {
-      .arco-section--static .arco-panel { padding: 4rem 0 3.5rem; }
-      .arco-section--static .arco-list { grid-template-columns: 1fr; padding: 0 1.15rem; gap: 1rem; }
-      .arco-section--static .arco-card { border-radius: 14px; }
-      .arco-section--static .arco-card__title { font-size: 1.15rem; padding: 0 1rem 1rem; }
-    }
-
-    /* ═══ Sobreposição da próxima seção sobre o arco — SOMENTE DESKTOP ═══ */
-    .arco-section { position: relative; z-index: 0; }
-    #urgencia { position: relative; z-index: 2; }
-    @media (min-width: 1024px) {
-      #urgencia {
-        margin-top: clamp(-22rem, -32vh, -10rem);
-        border-radius: 32px 32px 0 0;
-        /* Topo transparente → dissolve o arco gradualmente (efeito de "vinheta" suave) */
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.45) 120px, #000000 260px) !important;
-      }
+      .flick-section--static .flick-stage { grid-template-columns: 1fr; }
+      .flick-stage { height: min(26rem, 52vh); }
+      .flick-card { width: min(15rem, 66vw); margin-left: calc(min(15rem, 66vw) / -2); }
     }
 
     /* ═══ MODERNIZAÇÃO: O QUE MUDA (antes/depois) ═══ */
@@ -581,22 +544,15 @@
       .kit-hero__cta .kit-btn-shiny { width: 100% !important; max-width: 340px !important; display: block !important; }
       .kit-btn-shiny { padding: 0.8rem 1.4rem !important; font-size: 0.9rem !important; width: auto !important; }
       .kit-section { padding: 3rem 0 !important; }
-      .arco-panel { height: auto !important; min-height: unset !important; padding: 3rem 0 !important; }
-      .arco-panel::after { display: none !important; }
-      .arco-intro { margin-bottom: 2rem !important; }
-      .arco-stage { display: block !important; flex: unset !important; }
-      .arco-collection { width: 100% !important; }
-      .arco-section--static .arco-list { grid-template-columns: 1fr !important; padding: 0 1.25rem !important; gap: 1rem !important; }
-      .arco-section--static .arco-card { border-radius: 16px !important; aspect-ratio: 16 / 9 !important; }
-      .arco-section--static .arco-card__title { font-size: 1.3rem !important; padding: 0 1.1rem 1.1rem !important; }
-      [data-anim="fade-left"], [data-anim="fade-right"], [data-anim="fade-up"] { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .flick-stage { height: min(26rem, 52vh) !important; }
+            [data-anim="fade-left"], [data-anim="fade-right"], [data-anim="fade-up"] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .swiper { overflow: hidden !important; }
       .swiper-pagination { display: block !important; }
       .wa-float { right: 16px !important; bottom: 16px !important; width: 50px !important; height: 50px !important; }
       /* Trava o pan horizontal: nada pode arrastar a tela pro lado */
       section#tubes-section { overflow-x: clip !important; }
       .kit-hero__watermark { font-size: 34vw !important; }
-      .arco-section { overflow-x: clip !important; }
+            .flick-section { overflow-x: clip !important; }
     }
 
     /* ═══ MARQUEE DE SCROLL (portfólio) ═══ */
@@ -709,8 +665,20 @@
     }
 
     #modelos {
-      background: linear-gradient(to bottom, #000000 0%, #0a0f1c 180px) !important;
-      /* sem margin-top: margem em elemento pinado causa salto no GSAP */
+      background: var(--kit-bg-primary) !important;
+      position: relative;
+    }
+    /* Vinheta esfumaçada: dissolve o brilho do canvas da hero no preto, sem linha seca */
+    #modelos::before {
+      content: "";
+      position: absolute;
+      top: -260px;
+      left: 0;
+      right: 0;
+      height: 260px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 45%, #000000 96%);
+      pointer-events: none;
+      z-index: 2;
     }
 
     #tubes-section .kit-glow-line {
@@ -950,57 +918,43 @@
   </section>
 
 
-  <!-- ═══ BLOCO 3.5: ARCO DE IMAGENS ═══ -->
-  <section id="arco" class="arco-section" aria-label="Portfólio de serviços">
-    <div class="arco-panel">
-      <div class="arco-intro">
+  <!-- ═══ BLOCO 3.5: CARDS EMPILHADOS (drag) ═══ -->
+  <section id="arco" class="flick-section" aria-label="Portfólio de serviços" data-flick-cards-init>
+    <div class="flick-container">
+      <div class="flick-intro" data-anim="fade-up">
         <span class="kit-label kit-label-alt">portfólio</span>
-        <h2 class="arco-heading">Modelos de Projetos que já <span class="kit-text-gradient-blue">estão no AR</span>.</h2>
-        <p class="arco-lead">Criamos páginas para qualquer nicho, cada uma com design, copy e estrutura pensados para <strong>converter visitantes em clientes</strong>.</p>
+        <h2 class="flick-heading">Modelos de Projetos que já <span class="kit-text-gradient-blue">estão no AR</span>.</h2>
+        <p class="flick-lead">Criamos páginas para qualquer nicho, cada uma com design, copy e estrutura pensados para <strong>converter visitantes em clientes</strong>.</p>
       </div>
 
-      <div class="arco-stage">
-        <div class="arco-collection">
-          <ul class="arco-list" id="arcoList">
-            <li class="arco-item" style="--card-index: 1;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Landing page de alta conversão criada pela Base Code" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Landing Pages</h3>
-              </article>
-            </li>
-            <li class="arco-item" style="--card-index: 2;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Site institucional profissional criado pela Base Code" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Sites Institucionais</h3>
-              </article>
-            </li>
-            <li class="arco-item" style="--card-index: 3;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Site para restaurante com menu digital" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Menus Digitais</h3>
-              </article>
-            </li>
-            <li class="arco-item" style="--card-index: 4;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Portfólio profissional para prestadores de serviço" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Portfólios</h3>
-              </article>
-            </li>
-            <li class="arco-item" style="--card-index: 5;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Página de vendas para infoprodutos" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Páginas de Vendas</h3>
-              </article>
-            </li>
-            <li class="arco-item" style="--card-index: 6;">
-              <article class="arco-card">
-                <img src="images/01.png" alt="Site de agendamento para clínicas e barbearias" loading="lazy" decoding="async">
-                <h3 class="arco-card__title">Sites de Agendamento</h3>
-              </article>
-            </li>
-          </ul>
+      <div class="flick-stage" data-flick-cards-list data-flick-drag-status="grab">
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Landing page de alta conversão criada pela Base Code" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Landing Pages</h3>
+        </div>
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Site institucional profissional criado pela Base Code" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Sites Institucionais</h3>
+        </div>
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Site para restaurante com menu digital" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Menus Digitais</h3>
+        </div>
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Portfólio profissional para prestadores de serviço" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Portfólios</h3>
+        </div>
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Página de vendas para infoprodutos" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Páginas de Vendas</h3>
+        </div>
+        <div class="flick-card" data-flick-cards-item role="listitem">
+          <img src="images/01.png" alt="Site de agendamento para clínicas e barbearias" loading="lazy" decoding="async">
+          <h3 class="flick-card__title">Sites de Agendamento</h3>
         </div>
       </div>
+
+      <p class="flick-hint">Arraste os cards para os lados</p>
     </div>
   </section>
 
@@ -1364,6 +1318,7 @@
   <!-- ═══ Dependências CDN ═══ -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Draggable.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
@@ -1461,107 +1416,134 @@
     })();
   </script>
 
-  <!-- ═══ Arco de imagens: pin + rotação com ScrollTrigger ═══ -->
+  <!-- ═══ Cards empilhados: drag horizontal com GSAP Draggable ═══ -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var section = document.querySelector('.arco-section');
-      var panel = section && section.querySelector('.arco-panel');
-      var list = document.getElementById('arcoList');
-      if (!section || !panel || !list) return;
+    (function () {
+      function init() {
+        var section = document.querySelector('.flick-section[data-flick-cards-init]');
+        var stage = section && section.querySelector('[data-flick-cards-list]');
+        if (!section || !stage) return;
 
-      var cards = list.querySelectorAll('.arco-item');
-      var count = cards.length;
-      if (count < 2) return;
+        var cards = Array.prototype.slice.call(stage.querySelectorAll('[data-flick-cards-item]'));
+        var total = cards.length;
+        if (total < 2) return;
 
-      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var noGsap = !(window.gsap && window.ScrollTrigger);
-      var isMobile = window.matchMedia('(max-width: 767px)').matches;
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced || !(window.gsap && window.Draggable)) {
+          section.classList.add('flick-section--static');
+          return;
+        }
 
-      // Fallback estático: no mobile, com reduced-motion ou sem GSAP,
-      // renderiza grade legível sem pin (evita saltos com 100svh/URL bar)
-      if (reduced || noGsap || isMobile) {
-        section.classList.add('arco-section--static');
-        cards.forEach(function (c) { c.style.transform = 'none'; });
-        return;
-      }
+        gsap.registerPlugin(Draggable);
 
-      gsap.registerPlugin(ScrollTrigger);
+        var activeIndex = 0;
+        var isDragging = false;
 
-      // Remove transforms inline residuais para começar sempre no card 1
-      cards.forEach(function (c) { c.removeAttribute('style'); });
+        function getConfig(diff) {
+          if (diff === 0)  return { x: 0,   rot: 0,   s: 1,   o: 1, z: 5 };
+          if (diff === 1)  return { x: 62,  rot: 10,  s: 0.9, o: 1, z: 4 };
+          if (diff === -1) return { x: -62, rot: -10, s: 0.9, o: 1, z: 4 };
+          if (diff === 2)  return { x: 108, rot: 16,  s: 0.8, o: 1, z: 3 };
+          if (diff === -2) return { x: -108, rot: -16, s: 0.8, o: 1, z: 3 };
+          var dir = diff > 0 ? 1 : -1;
+          return { x: 150 * dir, rot: 22 * dir, s: 0.62, o: 0, z: 2 };
+        }
 
-      function stepDeg() {
-        return window.innerWidth >= 1024 ? 24 : 14;
-      }
+        function norm(diff) {
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+          return diff;
+        }
 
-      function applyCardTransforms() {
-        var cs = getComputedStyle(section);
-        var fontSize = parseFloat(getComputedStyle(list).fontSize);
-        var radius = parseFloat(cs.getPropertyValue('--arco-radius')) || 90;
-        var originY = (radius * fontSize) + 'px';
-        cards.forEach(function (card, i) {
-          card.style.setProperty('--card-index', i + 1);
-          card.style.transformOrigin = '50% ' + originY;
-          card.style.transform = 'rotate(calc(var(--arco-step) * ' + i + '))';
+        function render(instant) {
+          cards.forEach(function (card, i) {
+            var diff = i - activeIndex;
+            if (diff > total / 2) diff -= total;
+            if (diff < -total / 2) diff += total;
+            var cfg = getConfig(diff);
+            var w = card.offsetWidth || 1;
+            gsap.to(card, {
+              x: (cfg.x / 100) * w,
+              rotation: cfg.rot,
+              scale: cfg.s,
+              opacity: cfg.o,
+              zIndex: cfg.z,
+              duration: instant ? 0 : 0.65,
+              ease: instant ? 'none' : 'power3.out'
+            });
+            card.setAttribute('data-flick-item-status',
+              diff === 0 ? 'active' : (diff > 0 ? (diff + '-after') : ((-diff) + '-before')));
+          });
+        }
+
+        // Zera transforms residuais e posiciona
+        cards.forEach(function (c) { gsap.set(c, { xPercent: -0, x: 0 }); });
+        render(true);
+
+        function step(delta) {
+          activeIndex = ((activeIndex + delta) % total + total) % total;
+          render(false);
+        }
+
+        var dragger = document.createElement('div');
+        dragger.setAttribute('data-flick-cards-dragger', '');
+        stage.appendChild(dragger);
+
+        var stageWidth = stage.offsetWidth || window.innerWidth;
+        window.addEventListener('resize', function () {
+          stageWidth = stage.offsetWidth || window.innerWidth;
+          render(true);
+        }, { passive: true });
+
+        Draggable.create(dragger, {
+          type: 'x',
+          trigger: stage,
+          allowNativeTouchScrolling: true,
+          dragClickables: false,
+          onPress: function () {
+            stage.setAttribute('data-flick-drag-status', 'grabbing');
+          },
+          onRelease: function (self) {
+            stage.setAttribute('data-flick-drag-status', 'grab');
+            var dx = this.x;
+            var threshold = Math.max(30, stageWidth * 0.08);
+            var steps = Math.round(-dx / threshold);
+            gsap.set(dragger, { x: 0 });
+            if (steps !== 0) step(steps);
+            else render(false);
+          },
+          onDrag: function () {
+            // Feedback ao vivo: card ativo segue o ponteiro, vizinho se aproxima
+            var dx = this.x;
+            var w = cards[activeIndex].offsetWidth || 1;
+            gsap.set(cards[activeIndex], { x: dx * 1.1, rotation: dx / 28 });
+            var neighbor = dx < 0 ? activeIndex + 1 : activeIndex - 1;
+            if (neighbor >= 0 && neighbor < total) {
+              var base = getConfig(dx < 0 ? 1 : -1);
+              var progress = Math.min(Math.abs(dx) / (w * 1.2), 1);
+              gsap.set(cards[neighbor], {
+                x: (base.x / 100) * w * (1 - progress * 0.55),
+                rotation: base.rot * (1 - progress)
+              });
+            }
+          }
         });
-        list.style.transformOrigin = '50% ' + originY;
+
+        // Clicar num card lateral traz ele pra frente
+        cards.forEach(function (card, i) {
+          card.addEventListener('click', function () {
+            if (isDragging) return;
+            if (i !== activeIndex) { activeIndex = i; render(false); }
+          });
+        });
       }
 
-      function buildTrigger() {
-        var step = parseFloat(getComputedStyle(section).getPropertyValue('--arco-step')) || 24;
-        return gsap.fromTo(list,
-          { rotation: 0 },
-          {
-            rotation: -step * (count - 1),
-            ease: 'none',
-            scrollTrigger: {
-              trigger: panel,
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              start: 'top top',
-              end: '+=' + (window.innerHeight * (count - 1) * 0.6),
-              scrub: true,
-              invalidateOnRefresh: true
-            }
-          }
-        );
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
       }
-
-      applyCardTransforms();
-      buildTrigger();
-
-      // Intro some com blur/fade assim que os cards começam a girar (1º→2º card)
-      var intro = section.querySelector('.arco-intro');
-      if (intro) {
-        gsap.fromTo(intro,
-          { opacity: 1, filter: 'blur(0px)' },
-          {
-            opacity: 0.06,
-            filter: 'blur(7px)',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: panel,
-              start: 'top top',
-              end: '+=' + (window.innerHeight * 0.45),
-              scrub: true
-            }
-          }
-        );
-      }
-
-      ScrollTrigger.addEventListener('refreshInit', applyCardTransforms);
-      // Recalcula o pin depois que imagens/fontes e o Swiper estabilizarem o layout
-      function refreshLater() {
-        ScrollTrigger.refresh();
-        setTimeout(ScrollTrigger.refresh, 500);
-        setTimeout(ScrollTrigger.refresh, 1500);
-      }
-      window.addEventListener('load', refreshLater);
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-      }
-    });
+    })();
   </script>
 
   <!-- ═══ TubesCursor — efeito de luz no hero ═══ -->
