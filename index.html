@@ -190,166 +190,45 @@
       contain-intrinsic-size: auto 600px;
     }
 
-    /* ═══ SEÇÃO CARDS EMPILHADOS (flick cards) ═══ */
-    .flick-section {
-      background: #000;
-      overflow: hidden;
-      padding: 5.5rem 0 6rem;
-      position: relative;
-      z-index: 0;
+    /* ═══ MODERNIZAÇÃO: O QUE MUDA (lista editorial minimalista) ═══ */
+    .muda-list {
+      max-width: 880px; margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
     }
-    .flick-container {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 2.5rem;
+    .muda-row {
+      padding: 1.6rem 0 1.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .flick-intro { text-align: center; max-width: 760px; }
-    .flick-intro .kit-label { display: inline-block; margin-bottom: 0.75rem; }
-    .flick-heading {
+    .muda-before {
+      display: flex; align-items: flex-start; gap: 0.65rem;
+      margin: 0 0 0.7rem;
+      color: #7f8b9b;
+      font-size: 0.95rem; line-height: 1.5;
+    }
+    .muda-before span { color: #f87171; flex-shrink: 0; opacity: 0.85; }
+    .muda-after {
+      display: flex; align-items: flex-start; gap: 0.7rem;
       margin: 0;
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(2.25rem, 1.8rem + 2.2vw, 4.25rem);
-      line-height: 1.08; letter-spacing: -0.02em;
+      color: #f6faff;
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      font-weight: 800; line-height: 1.32;
+      letter-spacing: -0.01em;
     }
-    .flick-lead {
-      margin: 1rem 0 0;
-      font-size: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
-      line-height: 1.5; letter-spacing: -0.01em;
-      color: var(--text-secondary);
+    .muda-after > span[aria-hidden] {
+      flex-shrink: 0; margin-top: 0.25rem;
+      width: 1.5rem; height: 1.5rem; border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: #0b1626;
+      background: linear-gradient(135deg, #4fc3ff, #0a74ff);
+      box-shadow: 0 0 14px rgba(10, 116, 255, 0.35);
     }
-    .flick-hint {
-      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.4);
-    }
-    /* Palco: dá altura ao leque de cards */
-    .flick-stage {
-      position: relative;
-      width: min(30rem, 82vw);
-      height: min(30rem, 58vh);
-      min-height: 22rem;
-      touch-action: pan-y;
-    }
-    .flick-stage[data-flick-drag-status="grabbing"] { cursor: grabbing; }
-    .flick-card {
-      position: absolute;
-      top: 0; left: 50%;
-      width: min(18rem, 62vw);
-      height: 100%;
-      margin-left: calc(min(18rem, 62vw) / -2);
-      border-radius: 1em;
-      overflow: hidden;
-      background: #0a0f1c;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow:
-        0 0 0 1px rgba(10, 116, 255, 0.18),
-        0 24px 70px rgba(0, 0, 0, 0.55),
-        0 0 42px rgba(10, 116, 255, 0.12);
-      will-change: transform, opacity;
-      user-select: none;
-      transform: translateZ(0);
-    }
-    .flick-card img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-    .flick-card::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,12,24,0.05) 40%, rgba(8,12,24,0.45) 72%, rgba(4,6,12,0.88) 100%);
-      pointer-events: none;
-    }
-    .flick-card__title {
-      margin: 0;
-      position: absolute; left: 0; right: 0; bottom: 1.1rem; z-index: 2;
-      padding: 0 1.25rem;
-      font-family: var(--font-display); font-weight: 700;
-      font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
-      line-height: 1; letter-spacing: -0.03em;
-      color: #f2f6fc;
-      text-shadow: 0 0 2rem rgba(0, 0, 0, 0.45);
-      pointer-events: none;
-    }
-    .flick-card__dragger {
-      position: absolute; inset: 0;
-      z-index: 8;
-      cursor: grab;
-      touch-action: pan-y;
-    }
-    /* fallback sem movimento (reduced-motion / sem GSAP) */
-    .flick-section--static .flick-stage {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; width: 100%; height: auto; min-height: 0;
-    }
-    .flick-section--static .flick-card {
-      position: relative; left: auto; top: auto; margin: 0;
-      aspect-ratio: 3 / 4; height: auto;
-    }
-    @media (max-width: 767px) {
-      .flick-section--static .flick-stage { grid-template-columns: 1fr; }
-      .flick-stage { height: min(26rem, 52vh); }
-      .flick-card { width: min(15rem, 66vw); margin-left: calc(min(15rem, 66vw) / -2); }
-    }
-
-    /* ═══ MODERNIZAÇÃO: O QUE MUDA (antes/depois) ═══ */
-    #o-que-muda .page-before-after__grid {
-      max-width: 920px;
-      margin: 0 auto;
-      gap: 1.25rem;
-      position: relative;
-    }
-    #o-que-muda .page-before-after__heading { font-size: 1.15rem !important; margin-bottom: 0.9rem !important; }
-    #o-que-muda .page-before-after__box {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0d1526 0%, #0a0f1c 55%, #0d1f3a 100%) !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
-      border-radius: 20px !important;
-      padding: 1.2rem 1.15rem !important;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
-      transition: transform .35s cubic-bezier(.22,.61,.36,1), border-color .35s ease, box-shadow .35s ease;
-    }
-    /* Linha de luz no topo de cada card */
-    #o-que-muda .page-before-after__box::before {
-      content: '';
-      position: absolute; top: 0; left: 10%; right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-    }
-    #o-que-muda .page-before-after__box--after { border-color: rgba(79, 195, 255, 0.55) !important; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), 0 0 34px rgba(10, 116, 255, 0.1) inset, 0 0 26px rgba(10, 116, 255, 0.18); }
-    #o-que-muda .page-before-after__box:hover {
-      transform: translateY(-4px);
-      border-color: rgba(79, 195, 255, 0.4) !important;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45), 0 0 44px rgba(10, 116, 255, 0.14);
-    }
-    /* Itens: mais compactos, ícones em tile */
-    #o-que-muda .page-before-after__list { gap: 0.6rem !important; }
-    #o-que-muda .page-before-after__item { gap: 0.6rem !important; align-items: center !important; }
-    #o-que-muda .page-before-after__item p { font-size: 0.92rem !important; line-height: 1.5 !important; }
-    #o-que-muda .page-before-after__icon {
-      width: 28px; height: 28px; flex-shrink: 0;
-      display: grid; place-items: center;
-      border-radius: 9px;
-      font-size: 0.78rem; font-weight: 700;
-      border: 1px solid rgba(255, 120, 120, 0.3);
-      background: rgba(255, 80, 80, 0.09);
-      color: #ff8a8a;
-      line-height: 1 !important;
-    }
-    #o-que-muda .page-before-after__col--after .page-before-after__icon {
-      border-color: rgba(79, 195, 255, 0.4);
-      background: rgba(10, 116, 255, 0.14);
-      color: #4fc3ff;
-    }
-    /* Brilho ambiente atrás da grade */
-    #o-que-muda .page-before-after__grid::before {
-      content: '';
-      position: absolute; inset: -12% -6%;
-      background: radial-gradient(ellipse 60% 55% at 70% 40%, rgba(10, 116, 255, 0.09), transparent 65%);
-      pointer-events: none;
+    .muda-after strong { color: #4fc3ff; }
+    @media (max-width: 600px) {
+      .muda-list { max-width: 100%; }
+      .muda-row { padding: 1.15rem 0 1.3rem; }
+      .muda-before { font-size: 0.88rem; margin-bottom: 0.55rem; }
+      .muda-after { font-size: 1.12rem; line-height: 1.4; }
+      .muda-after > span[aria-hidden] { width: 1.3rem; height: 1.3rem; font-size: 0.72rem; margin-top: 0.15rem; }
     }
 
     /* ═══ MODERNIZAÇÃO: PROCESSO (minimalista) ═══ */
@@ -544,7 +423,6 @@
       .kit-hero__cta .kit-btn-shiny { width: 100% !important; max-width: 340px !important; display: block !important; }
       .kit-btn-shiny { padding: 0.8rem 1.4rem !important; font-size: 0.9rem !important; width: auto !important; }
       .kit-section { padding: 3rem 0 !important; }
-            .flick-stage { height: min(26rem, 52vh) !important; }
             [data-anim="fade-left"], [data-anim="fade-right"], [data-anim="fade-up"] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .swiper { overflow: hidden !important; }
       .swiper-pagination { display: block !important; }
@@ -552,7 +430,6 @@
       /* Trava o pan horizontal: nada pode arrastar a tela pro lado */
       section#tubes-section { overflow-x: clip !important; }
       .kit-hero__watermark { font-size: 34vw !important; }
-            .flick-section { overflow-x: clip !important; }
     }
 
     /* ═══ MARQUEE DE SCROLL (portfólio) ═══ */
@@ -596,10 +473,9 @@
     .marquee-tile {
           flex-shrink: 0;
           width: min(420px, 78vw);
-          aspect-ratio: 420 / 270;
+          aspect-ratio: 16 / 9;
           height: auto;
-          object-fit: cover;
-          object-position: center 70%;
+          object-fit: contain;
           filter: brightness(1.45) saturate(1.15);
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.14);
@@ -629,7 +505,26 @@
               pointer-events: none;
               background: #151917;
             }
-            /* Card de vídeo (Vimeo): o player preenche o card inteiro, sem escala */
+            /* Slot vazio (aguardando conteúdo do cliente) */
+            .marquee-frame--empty {
+              background:
+                radial-gradient(ellipse 60% 45% at 50% 42%, rgba(10, 116, 255, 0.10), transparent 70%),
+                linear-gradient(160deg, #0d1526 0%, #0a0f1c 60%);
+              border: 1px dashed rgba(120, 170, 255, 0.22);
+              box-shadow: none;
+            }
+            .marquee-frame--empty::after {
+              content: "EM BREVE";
+              position: absolute; inset: 0;
+              display: flex; align-items: center; justify-content: center;
+              font-family: 'Plus Jakarta Sans', sans-serif;
+              font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
+              color: rgba(140, 180, 255, 0.38);
+            }
+            /* Card de vídeo (Vimeo/local): 16:9 nativo, sem cortar os lados */
+            .marquee-frame--video {
+              aspect-ratio: 16 / 9;
+            }
             .marquee-frame--video iframe,
                         .marquee-frame--video video {
                           position: absolute;
@@ -637,7 +532,8 @@
                           width: 100%;
                           height: 100%;
                           transform: none;
-                          object-fit: cover;
+                          object-fit: contain;
+                          background: #0a0f1c;
                         }
 
     /* ═══ NICOS ATENDIDOS (marquee 2 fileiras) ═══ */
@@ -839,30 +735,6 @@
       }
       #processo .kit-process__timeline { overflow: visible !important; }
 
-      #o-que-muda .page-before-after__grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-      #o-que-muda .page-before-after__col { width: 100% !important; min-width: 0 !important; }
-      #o-que-muda .page-before-after__box {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 1.25rem 1rem !important;
-        overflow: hidden !important;
-      }
-      #o-que-muda .page-before-after__item {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: flex-start !important;
-        gap: 0.625rem !important;
-        overflow: hidden !important;
-      }
-      #o-que-muda .page-before-after__item p {
-        flex: 1 !important;
-        min-width: 0 !important;
-        overflow-wrap: break-word !important;
-        word-break: break-word !important;
-        margin: 0 !important;
-      }
-      #o-que-muda .page-before-after__icon { flex-shrink: 0 !important; line-height: 1.5 !important; }
-    }
   </style>
 </head>
 <body>
@@ -942,12 +814,9 @@
       <div class="portfolio-marquee">
         <div class="marquee-row" data-marquee-dir="right">
                   <div class="marquee-track">
-                              <div class="marquee-frame marquee-frame--video">
-                                <video src="images/modelo-stories-06.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
-                              </div>
-                              <div class="marquee-frame marquee-frame--video">
-                                <iframe src="https://player.vimeo.com/video/1229654422?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                              </div>
+                                                                  <div class="marquee-frame marquee-frame--video">
+                                                                    <video src="images/modelo-09.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                  </div>
                                           <img class="marquee-tile" src="images/stories-02.png" alt="Modelo de landing page de curso de stories" loading="lazy" decoding="async">
                                                                                     <div class="marquee-frame marquee-frame--video">
                                                                                       <iframe src="https://player.vimeo.com/video/1229633595?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -955,23 +824,34 @@
                                                                                     <div class="marquee-frame marquee-frame--video">
                                                                                                           <video src="images/modelo-nutricao-11.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
                     </div>
-                    <div class="marquee-frame">
-                      <iframe src="modelos/aurea-residences/index.html" title="Modelo Aurea Residences" loading="lazy" tabindex="-1"></iframe>
-                    </div>
                     <div class="marquee-frame marquee-frame--video">
-                      <video src="images/modelo-psicologa-07.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
-                    </div>
-                                <div class="marquee-frame marquee-frame--video">
-                                  <iframe src="https://player.vimeo.com/video/1229660478?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                                </div>
-                  </div>
+                                          <video src="images/modelo-psicologa-07.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                        </div>
+                                      </div>
                 </div>
                 <div class="marquee-row" data-marquee-dir="left">
                   <div class="marquee-track">
-                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 3" loading="lazy" decoding="async">
-                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 3" loading="lazy" decoding="async">
-                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital 2" loading="lazy" decoding="async">
-                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas 2" loading="lazy" decoding="async">
+                                      <div class="marquee-frame">
+                                        <iframe src="modelos/aurea-residences/index.html" title="Modelo Aurea Residences" loading="lazy" tabindex="-1"></iframe>
+                                      </div>
+                                      <div class="marquee-frame marquee-frame--video">
+                                                                              <video src="images/modelo-12.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                            </div>
+                                                                            <div class="marquee-frame">
+                                                                                                  <iframe src="modelos/vesper/index.html" title="Modelo Vesper Marketing" loading="lazy" tabindex="-1"></iframe>
+                                                                                                </div>
+                                                                                                <div class="marquee-frame">
+                                                                                                  <iframe src="modelos/lumen-one/index.html" title="Modelo Lumen One" loading="lazy" tabindex="-1"></iframe>
+                                                                                                </div>
+                                                          <div class="marquee-frame">
+                                                                                                                      <iframe src="modelos/techprime/index.html" title="Modelo TechPrime — Tecnologia & Manutenção" loading="lazy" tabindex="-1"></iframe>
+                                                                                                                    </div>
+                                                                                                                    <div class="marquee-frame">
+                                                                                                                                                                                <iframe src="modelos/construa-rapido/index.html" title="Modelo Projete Rápido — Estúdio de Design com IA" loading="lazy" tabindex="-1"></iframe>
+                                                                                                                                                                              </div>
+                                                                                                                                                                              <div class="marquee-frame marquee-frame--video">
+                                                                                                                      <video src="images/modelo-13.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                                                                    </div>
                   </div>
                 </div>
       </div>
@@ -980,7 +860,7 @@
 
 
   <!-- ═══ BLOCO 3: Antes/Depois ═══ -->
-  <section id="o-que-muda" class="kit-section kit-bg-navy page-before-after" data-anim="benefits-section">
+  <section id="o-que-muda" class="kit-section kit-bg-navy" data-anim="benefits-section">
     <div class="kit-separator"></div>
 
     <div class="kit-container">
@@ -989,53 +869,22 @@
         <h2 class="kit-h1">O que muda com a <span class="kit-text-gradient-blue">Base Code</span></h2>
       </div>
 
-      <div class="page-before-after__grid">
-        <div class="page-before-after__col page-before-after__col--before" data-anim="fade-left" data-anim-delay="0.1">
-          <h3 class="kit-h3 page-before-after__heading page-before-after__heading--before">Se você…</h3>
-          <div class="kit-card page-before-after__box page-before-after__box--before">
-            <ul class="page-before-after__list">
-              <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✕</span>
-                              <p class="kit-body-sm"><strong>Seu negócio não aparece no Google</strong>, e o cliente que te procura acaba fechando com o concorrente que aparece.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✕</span>
-                              <p class="kit-body-sm"><strong>Você vive de um link na bio genérico</strong>, que não mostra seu trabalho, não gera confiança e não vende nada por você.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✕</span>
-                              <p class="kit-body-sm"><strong>Sua página é antiga ou fraca</strong>, e o visitante clica, olha, desconfia e sai sem falar com você.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✕</span>
-                              <p class="kit-body-sm"><strong>Você sabe que seu negócio pode crescer mais</strong>, mas a presença digital hoje não acompanha o tamanho que ele quer ter.</p>
-                            </li>
-            </ul>
-          </div>
+      <div class="muda-list">
+        <div class="muda-row" data-anim="fade-up" data-anim-delay="0.1">
+          <p class="muda-before"><span aria-hidden="true">✕</span>Seu negócio não aparece no Google, e o cliente fecha com o concorrente que aparece.</p>
+          <p class="muda-after"><span aria-hidden="true">✓</span><span><strong>Existir de verdade no Google</strong>, com uma página que trabalha por você 24h por dia.</span></p>
         </div>
-
-        <div class="page-before-after__col page-before-after__col--after" data-anim="fade-right" data-anim-delay="0.2">
-          <h3 class="kit-h3 page-before-after__heading page-before-after__heading--after">Com a Base Code você vai</h3>
-          <div class="kit-card page-before-after__box page-before-after__box--after">
-            <ul class="page-before-after__list">
-              <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✓</span>
-                              <p class="kit-body-sm"><strong>Existir de verdade no Google</strong>, com uma página profissional que trabalha por você 24h por dia.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✓</span>
-                              <p class="kit-body-sm"><strong>Trocar o link da bio por uma página que vende</strong>: apresenta seu trabalho, prova valor e manda o cliente pro WhatsApp.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✓</span>
-                              <p class="kit-body-sm"><strong>Ter uma página atualizada e feita pro seu nicho</strong>, com design e copy que transformam visita em conversa.</p>
-                            </li>
-                            <li class="page-before-after__item">
-                              <span class="page-before-after__icon">✓</span>
-                              <p class="kit-body-sm"><strong>Passar profissionalismo de primeira</strong>, desde o primeiro clique, com orçamento justo e direto no WhatsApp.</p>
-                            </li>
-            </ul>
-          </div>
+        <div class="muda-row" data-anim="fade-up" data-anim-delay="0.2">
+          <p class="muda-before"><span aria-hidden="true">✕</span>Um link na bio genérico, que não mostra seu trabalho e não vende nada.</p>
+          <p class="muda-after"><span aria-hidden="true">✓</span><span><strong>Uma página que vende por você</strong>: apresenta seu trabalho, prova valor e manda o cliente pro WhatsApp.</span></p>
+        </div>
+        <div class="muda-row" data-anim="fade-up" data-anim-delay="0.3">
+          <p class="muda-before"><span aria-hidden="true">✕</span>Página antiga ou fraca, onde o visitante olha, desconfia e sai.</p>
+          <p class="muda-after"><span aria-hidden="true">✓</span><span><strong>Design moderno e feito pro seu nicho</strong>, que transforma visita em conversa.</span></p>
+        </div>
+        <div class="muda-row" data-anim="fade-up" data-anim-delay="0.4">
+          <p class="muda-before"><span aria-hidden="true">✕</span>Uma presença digital que não acompanha o tamanho que seu negócio quer ter.</p>
+          <p class="muda-after"><span aria-hidden="true">✓</span><span><strong>Profissionalismo de primeira</strong>, desde o primeiro clique, com orçamento direto no WhatsApp.</span></p>
         </div>
       </div>
 
@@ -1079,46 +928,6 @@
                 <div class="nichos-more" data-anim="fade-up" data-anim-delay="0.25">+ muito mais: se o seu negócio precisa vender online, a gente cria a página certa pra isso.</div>
         </div>
       </section>
-
-        <!-- ═══ BLOCO 3.5: CARDS EMPILHADOS (drag) ═══ -->
-        <section id="arco" class="flick-section" aria-label="Portfólio de serviços" data-flick-cards-init>
-    <div class="flick-container">
-      <div class="flick-intro" data-anim="fade-up">
-        <span class="kit-label kit-label-alt">portfólio</span>
-        <h2 class="flick-heading">Modelos de Projetos que já <span class="kit-text-gradient-blue">estão no AR</span>.</h2>
-        <p class="flick-lead">Criamos páginas para qualquer nicho, cada uma com design, copy e estrutura pensados para <strong>converter visitantes em clientes</strong>.</p>
-      </div>
-
-      <div class="flick-stage" data-flick-cards-list data-flick-drag-status="grab">
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Landing page de alta conversão criada pela Base Code" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Landing Pages</h3>
-        </div>
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Site institucional profissional criado pela Base Code" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Sites Institucionais</h3>
-        </div>
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Site para restaurante com menu digital" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Menus Digitais</h3>
-        </div>
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Portfólio profissional para prestadores de serviço" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Portfólios</h3>
-        </div>
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Página de vendas para infoprodutos" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Páginas de Vendas</h3>
-        </div>
-        <div class="flick-card" data-flick-cards-item role="listitem">
-          <img src="images/01.png" alt="Site de agendamento para clínicas e barbearias" loading="lazy" decoding="async">
-          <h3 class="flick-card__title">Sites de Agendamento</h3>
-        </div>
-      </div>
-
-      <p class="flick-hint">Arraste os cards para os lados</p>
-    </div>
-  </section>
 
 
   <!-- ═══ BLOCO 4: Urgência ═══ -->
@@ -1480,7 +1289,6 @@
   <!-- ═══ Dependências CDN ═══ -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Draggable.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
@@ -1657,135 +1465,7 @@
     })();
   </script>
 
-  <!-- ═══ Cards empilhados: drag horizontal com GSAP Draggable ═══ -->
-  <script>
-    (function () {
-      function init() {
-        var section = document.querySelector('.flick-section[data-flick-cards-init]');
-        var stage = section && section.querySelector('[data-flick-cards-list]');
-        if (!section || !stage) return;
 
-        var cards = Array.prototype.slice.call(stage.querySelectorAll('[data-flick-cards-item]'));
-        var total = cards.length;
-        if (total < 2) return;
-
-        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduced || !(window.gsap && window.Draggable)) {
-          section.classList.add('flick-section--static');
-          return;
-        }
-
-        gsap.registerPlugin(Draggable);
-
-        var activeIndex = 0;
-        var isDragging = false;
-
-        function getConfig(diff) {
-          if (diff === 0)  return { x: 0,   rot: 0,   s: 1,   o: 1, z: 5 };
-          if (diff === 1)  return { x: 62,  rot: 10,  s: 0.9, o: 1, z: 4 };
-          if (diff === -1) return { x: -62, rot: -10, s: 0.9, o: 1, z: 4 };
-          if (diff === 2)  return { x: 108, rot: 16,  s: 0.8, o: 1, z: 3 };
-          if (diff === -2) return { x: -108, rot: -16, s: 0.8, o: 1, z: 3 };
-          var dir = diff > 0 ? 1 : -1;
-          return { x: 150 * dir, rot: 22 * dir, s: 0.62, o: 0, z: 2 };
-        }
-
-        function norm(diff) {
-          if (diff > total / 2) diff -= total;
-          if (diff < -total / 2) diff += total;
-          return diff;
-        }
-
-        function render(instant) {
-          cards.forEach(function (card, i) {
-            var diff = i - activeIndex;
-            if (diff > total / 2) diff -= total;
-            if (diff < -total / 2) diff += total;
-            var cfg = getConfig(diff);
-            var w = card.offsetWidth || 1;
-            gsap.to(card, {
-              x: (cfg.x / 100) * w,
-              rotation: cfg.rot,
-              scale: cfg.s,
-              opacity: cfg.o,
-              zIndex: cfg.z,
-              duration: instant ? 0 : 0.65,
-              ease: instant ? 'none' : 'power3.out'
-            });
-            card.setAttribute('data-flick-item-status',
-              diff === 0 ? 'active' : (diff > 0 ? (diff + '-after') : ((-diff) + '-before')));
-          });
-        }
-
-        // Zera transforms residuais e posiciona
-        cards.forEach(function (c) { gsap.set(c, { xPercent: -0, x: 0 }); });
-        render(true);
-
-        function step(delta) {
-          activeIndex = ((activeIndex + delta) % total + total) % total;
-          render(false);
-        }
-
-        var dragger = document.createElement('div');
-        dragger.setAttribute('data-flick-cards-dragger', '');
-        stage.appendChild(dragger);
-
-        var stageWidth = stage.offsetWidth || window.innerWidth;
-        window.addEventListener('resize', function () {
-          stageWidth = stage.offsetWidth || window.innerWidth;
-          render(true);
-        }, { passive: true });
-
-        Draggable.create(dragger, {
-          type: 'x',
-          trigger: stage,
-          allowNativeTouchScrolling: true,
-          dragClickables: false,
-          onPress: function () {
-            stage.setAttribute('data-flick-drag-status', 'grabbing');
-          },
-          onRelease: function (self) {
-            stage.setAttribute('data-flick-drag-status', 'grab');
-            var dx = this.x;
-            var threshold = Math.max(30, stageWidth * 0.08);
-            var steps = Math.round(-dx / threshold);
-            gsap.set(dragger, { x: 0 });
-            if (steps !== 0) step(steps);
-            else render(false);
-          },
-          onDrag: function () {
-            // Feedback ao vivo: card ativo segue o ponteiro, vizinho se aproxima
-            var dx = this.x;
-            var w = cards[activeIndex].offsetWidth || 1;
-            gsap.set(cards[activeIndex], { x: dx * 1.1, rotation: dx / 28 });
-            var neighbor = dx < 0 ? activeIndex + 1 : activeIndex - 1;
-            if (neighbor >= 0 && neighbor < total) {
-              var base = getConfig(dx < 0 ? 1 : -1);
-              var progress = Math.min(Math.abs(dx) / (w * 1.2), 1);
-              gsap.set(cards[neighbor], {
-                x: (base.x / 100) * w * (1 - progress * 0.55),
-                rotation: base.rot * (1 - progress)
-              });
-            }
-          }
-        });
-
-        // Clicar num card lateral traz ele pra frente
-        cards.forEach(function (card, i) {
-          card.addEventListener('click', function () {
-            if (isDragging) return;
-            if (i !== activeIndex) { activeIndex = i; render(false); }
-          });
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
-    })();
-  </script>
 
   <!-- ═══ TubesCursor — efeito de luz no hero ═══ -->
   <script type="module">

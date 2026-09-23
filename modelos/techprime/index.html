@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechPrime — Tecnologia & Manutenção</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600&display=swap">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600&display=swap');
+  :root {
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Outfit', sans-serif;
+    --ink: #0a1b33; --sub: #64748b; --bg: #f9fafb;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); font-family: var(--font-sans);
+    color: var(--ink); min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 28px 28px 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  .hero {
+    position: relative; width: 100%; max-width: 1400px; margin: 0 auto;
+    border-radius: 48px; background: #fff;
+    border: 1px solid rgba(148,163,184,0.5);
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.03);
+    overflow: hidden; height: 600px;
+    display: flex; flex-direction: column;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden; user-select: none;
+  }
+  .hero-bg video {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.05); transition: transform 1s;
+  }
+  .hero-content {
+    position: relative; z-index: 20; flex: 1;
+    padding: 48px 64px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    animation: rise 0.9s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(34px, 4.2vw, 56px); line-height: 1.06;
+    letter-spacing: -0.02em; color: var(--ink);
+  }
+  .hero p.sub {
+    margin-top: 18px; max-width: 560px;
+    font-family: var(--font-sans); font-size: 15px; line-height: 1.6;
+    color: var(--sub);
+  }
+  .hero .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 28px; padding: 13px 26px;
+    background: #0a152d; color: #fff; border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .hero .cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(10,21,45,0.25);
+  }
+
+  /* Navbar flutuante */
+  .nav-wrap {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    z-index: 30; animation: rise 0.9s 0.25s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  nav.pill-nav {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    padding: 6px; border-radius: 999px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(148,163,184,0.4);
+  }
+  .nav-logo {
+    width: 36px; height: 36px; border-radius: 999px;
+    background: #fff; border: 1px solid #f1f5f9; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    display: flex; align-items: center; justify-content: center;
+    color: #0a1b33; font-size: 15px;
+  }
+  .pill-link {
+    padding: 0 14px; font-size: 12px; font-weight: 600; color: #64748b;
+    background: none; border: 0; cursor: pointer;
+    transition: color 0.2s; font-family: var(--font-sans);
+  }
+  .pill-link:hover { color: #0a1b33; }
+  .pill-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; padding: 9px 20px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: #0a1b33;
+    border: 1px solid rgba(148,163,184,0.6); box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+  .pill-cta:hover { border-color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .pill-cta svg { width: 14px; height: 14px; }
+
+  /* Marquee de logos */
+  .logo-marquee {
+    margin-top: 24px; max-width: 1400px; width: 100%; margin-left: auto; margin-right: auto;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .logo-track {
+    display: flex; gap: 16px; width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+  .logo-marquee:hover .logo-track { animation-play-state: paused; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .logo-card {
+    position: relative; height: 96px; width: 160px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 999px; background: #fff;
+    border: 1px solid rgba(148,163,184,0.6); box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: border-color 0.25s; overflow: hidden;
+  }
+  .logo-card:hover { border-color: #cbd5e1; }
+  .logo-card .blob {
+    position: absolute; inset: 0; opacity: 0; transform: scale(1.5);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .logo-card:hover .blob { opacity: 1; transform: scale(1); }
+  .logo-card img {
+    width: 44px; height: 44px; object-fit: contain;
+    transition: filter 0.35s;
+  }
+  .logo-card:hover img { filter: brightness(0) invert(1); }
+
+  @media (max-width: 900px) {
+    body { padding: 16px; }
+    .hero { height: auto; min-height: 480px; border-radius: 32px; }
+    .hero-content { padding: 32px 24px; }
+    .nav-wrap { bottom: 20px; }
+    .hero h1 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260505_101331_74f9b798-3f00-4e86-8a01-377aa16ffeaa.mp4" autoplay loop muted playsinline preload="metadata"></video>
+  </div>
+
+  <div class="hero-content">
+    <h1>A fundação da<br>sua nova era digital</h1>
+    <p class="sub">
+      Projetamos, implementamos e mantemos a infraestrutura tecnológica de empresas,
+      equipes e comunidades — suporte, manutenção e evolução contínua, sem dor de cabeça.
+    </p>
+    <a class="cta" href="#contato">Fale conosco</a>
+  </div>
+
+  <div class="nav-wrap">
+    <nav class="pill-nav" aria-label="Principal">
+      <span class="nav-logo" aria-hidden="true">✦</span>
+      <button class="pill-link" type="button">Soluções</button>
+      <button class="pill-link" type="button">Suporte</button>
+      <a class="pill-cta" href="#contato">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;padding:9px 20px;border-radius:999px;font-size:12px;font-weight:600;color:#0a1b33;border:1px solid rgba(148,163,184,0.6);box-shadow:0 1px 2px rgba(0,0,0,0.05);transition:border-color 0.2s"
+          onmouseover="this.style.borderColor='#cbd5e1'" onmouseout="this.style.borderColor='rgba(148,163,184,0.6)'">
+          Fale conosco
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a1b33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<div class="logo-marquee" aria-hidden="true">
+  <div class="logo-track" id="track"></div>
+</div>
+
+<script>
+(function () {
+  var logos = [
+    { file: "procure.svg",   alt: "Procure",       from: "#2563eb", to: "#60a5fa" },
+    { file: "shopify.svg",   from: "#facc15",      to: "#f59e0b" },
+    { file: "blender.svg",   from: "#3b82f6",      to: "#93c5fd" },
+    { file: "figma.svg",     from: "#8b5cf6",      to: "#c4b5fd" },
+    { file: "spotify.svg",   from: "#ec4899",      to: "#f87171" },
+    { file: "lottielab.svg", from: "#fde047",      to: "#4ade80" },
+    { file: "google-cloud.svg", from: "#93c5fd",   to: "#bfdbfe" },
+    { file: "bing.svg",      from: "#22d3ee",      to: "#67e8f9" }
+  ];
+  var track = document.getElementById('track');
+  var html = '';
+  for (var pass = 0; pass < 2; pass++) {
+    logos.forEach(function (l) {
+      html +=
+        '<div class="logo-card">' +
+          '<div class="blob" style="background:linear-gradient(135deg,' + l.from + ',' + l.to + ')"></div>' +
+          '<img loading="lazy" alt="" src="https://svgl.app/library/' + l.file + '">' +
+        '</div>';
+    });
+  }
+  track.innerHTML = html;
+})();
+</script>
+</body>
+</html>

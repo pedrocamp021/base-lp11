@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumen One | Domine seu foco</title>
+<meta name="description" content="Conheça o Lumen One, o dispositivo inteligente criado para transformar foco em resultado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&display=swap">
+<style>
+  :root {
+    --ink: #f3fff9;
+    --muted: #a9bdb7;
+    --accent: #6dff9f;
+    --accent-dark: #062a1a;
+    --line: rgba(187, 255, 222, 0.24);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; min-width: 320px; overflow-x: hidden;
+    color: var(--ink); background: #020706;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 64px 24px;
+    background: #020706;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, rgba(0, 6, 5, 0.3), transparent 65%),
+      linear-gradient(0deg, rgba(0, 5, 4, 0.6), transparent 28%, transparent 80%, rgba(0, 5, 4, 0.2));
+  }
+  .hero__canvas {
+    position: absolute; inset: 0; z-index: -2;
+    display: block; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hero__content {
+    width: min(100%, 960px); min-width: 0;
+    justify-self: center; text-align: center;
+    animation: reveal 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .brand {
+    display: inline-flex; align-items: center; gap: 11px;
+    margin-bottom: clamp(42px, 7vh, 76px);
+    text-decoration: none; color: var(--ink);
+    font-family: 'Anton', sans-serif;
+    font-size: .9rem; letter-spacing: .25em; text-transform: uppercase;
+  }
+  .brand__mark {
+    width: 10px; height: 22px;
+    border: 1px solid var(--accent);
+    border-radius: 100%;
+    transform: rotate(25deg);
+    box-shadow: 0 0 18px rgba(109, 255, 159, 0.8), inset 0 0 7px rgba(109, 255, 159, 0.55);
+  }
+
+  .hero__eyebrow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 13px; margin: 0 0 20px;
+    color: var(--accent);
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(0.7rem, 1.4vw, 0.82rem);
+    letter-spacing: .26em; text-transform: uppercase;
+  }
+  .hero__eyebrow span {
+    width: 27px; height: 1px;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  h1 {
+    max-width: 920px; margin: 0 auto;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3.25rem, 8.4vw, 7.7rem);
+    font-weight: 400; line-height: .92; letter-spacing: -.025em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    text-shadow: 0 5px 36px rgba(0, 0, 0, 0.82);
+  }
+  h1 span {
+    display: block; margin-top: .09em;
+    color: var(--accent);
+    font-family: 'Condiment', cursive;
+    font-size: .76em; line-height: .88; letter-spacing: .01em;
+    text-transform: none;
+    text-shadow: 0 0 26px rgba(65, 255, 151, 0.24), 0 5px 30px rgba(0, 0, 0, 0.9);
+  }
+
+  .hero__description {
+    max-width: 610px; margin: clamp(25px, 4vh, 38px) auto 0;
+    color: var(--muted);
+    font-size: clamp(.95rem, 1.7vw, 1.08rem); line-height: 1.7;
+    text-wrap: balance;
+  }
+
+  .hero__cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 13px; min-height: 58px;
+    margin-top: clamp(28px, 4.5vh, 42px);
+    padding: 0 30px; overflow: hidden;
+    border: 1px solid var(--accent); border-radius: 2px;
+    color: var(--accent-dark); background: var(--accent);
+    box-shadow: 0 0 0 rgba(109, 255, 159, 0), 0 12px 34px rgba(0, 0, 0, 0.34);
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+    font-size: .86rem; letter-spacing: .12em; text-transform: uppercase;
+    transition: color 220ms ease, background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+  .hero__cta svg {
+    width: 21px; fill: none;
+    stroke: currentColor; stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 220ms ease;
+  }
+  .hero__cta:hover {
+    color: var(--accent); background: rgba(5, 25, 18, 0.78);
+    box-shadow: 0 0 28px rgba(109, 255, 159, 0.24), 0 14px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+  }
+  .hero__cta:hover svg { transform: translateX(4px); }
+  .hero__cta:focus-visible, .brand:focus-visible {
+    outline: 2px solid #fff; outline-offset: 5px;
+  }
+
+  .hero__note {
+    display: flex; justify-content: center; gap: 9px;
+    margin: 15px 0 0;
+    color: rgba(222, 240, 233, 0.56);
+    font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  }
+
+  .toast {
+    position: fixed; right: 20px; bottom: 20px; z-index: 5;
+    max-width: calc(100vw - 40px);
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    color: var(--ink); background: rgba(3, 20, 14, 0.92);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    font-size: .82rem;
+    opacity: 0; pointer-events: none;
+    transform: translateY(15px);
+    backdrop-filter: blur(12px);
+    transition: opacity 240ms ease, transform 240ms ease;
+  }
+  .toast.is-visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 640px) {
+    .toast { left: 20px; right: 20px; text-align: center; }
+  }
+
+  /* Fallback quando WebGL não está disponível */
+  .hero--fallback::after {
+    content: "";
+    position: absolute; inset: 0; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, #020706 25%, transparent 65%),
+      radial-gradient(ellipse 90% 62% at 50% 50%, rgba(6, 84, 50, 0.38), transparent 72%),
+      radial-gradient(ellipse 46% 82% at 50% 50%, rgba(3, 46, 30, 0.6), transparent 76%),
+      radial-gradient(ellipse 22% 70% at 50% 50%, rgba(10, 90, 60, 0.35), transparent 80%),
+      linear-gradient(0deg, rgba(0, 5, 4, 0.85), transparent 45%),
+      #020706;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__content { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <canvas class="hero__canvas" aria-hidden="true"></canvas>
+
+    <div class="hero__content">
+      <a class="brand" href="#" aria-label="Lumen One, início">
+        <span class="brand__mark" aria-hidden="true"></span>
+        Lumen One
+      </a>
+
+      <p class="hero__eyebrow">
+        <span aria-hidden="true"></span>
+        A nova geração do foco
+        <span aria-hidden="true"></span>
+      </p>
+
+      <h1 id="hero-title">
+        Silencie o ruído.
+        <span>Ative o extraordinário.</span>
+      </h1>
+
+      <p class="hero__description">
+        Lumen One é o dispositivo inteligente que entende o seu ritmo,
+        reduz distrações e conduz você ao seu melhor estado de concentração.
+      </p>
+
+      <button class="hero__cta" type="button" data-cta>
+        <span>Quero ser um dos primeiros</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </button>
+
+      <p class="hero__note">
+        Pré-venda exclusiva
+        <span aria-hidden="true">•</span>
+        Garantia de 30 dias
+      </p>
+    </div>
+
+    <div class="toast" role="status" aria-live="polite" data-toast>
+      Pré-venda em breve — você chegou primeiro.
+    </div>
+  </section>
+</main>
+
+<script defer>
+/* CTA com toast */
+(function () {
+  var cta = document.querySelector('[data-cta]');
+  var toast = document.querySelector('[data-toast]');
+  if (!cta || !toast) return;
+  var timer = null;
+  var label = cta.querySelector('span');
+  cta.addEventListener('click', function () {
+    label.textContent = 'Pré-venda em breve';
+    toast.classList.add('is-visible');
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('is-visible'); }, 3200);
+  });
+})();
+</script>
+
+<script defer>
+/* Cortina WebGL procedural — Lumen One */
+(function () {
+  var hero = document.querySelector('.hero');
+  var canvas = document.querySelector('.hero__canvas');
+  if (!hero || !canvas) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var gl = null, program = null, buffers = null, uniforms = null;
+  var count = 0;
+  var lost = false, visible = true, needsResize = true;
+  var frame = 0, previous = 0, time = 0;
+  var target = { x: 0, y: 0 }, pointer = { x: 0, y: 0 };
+
+  function precisionPrefix(gl) {
+    try {
+      var fmt = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT);
+      return fmt && fmt.precision > 0 ? 'highp' : 'mediump';
+    } catch (e) { return 'mediump'; }
+  }
+
+  function vertexSource() {
+    return [
+      'attribute vec3 aRibbon;',
+      'uniform float uTime;',
+      'uniform float uAspect;',
+      'uniform vec2 uPointer;',
+      'varying vec3 vPosition;',
+      'varying vec3 vNormal;',
+      'varying vec2 vRibbon;',
+      '#define PI 3.141593',
+      'vec3 surface(vec3 a){',
+      '  float side = sign(a.x);',
+      '  float envelope = exp(-pow(abs(a.z) / 0.82, 6.0));',
+      '  float influence = exp(-a.x * a.x * 1.15);',
+      '  float breath = 1.0 + 0.035 * sin(uTime * 0.55 + a.z * 1.8);',
+      '  float bend = side * 0.3 * smoothstep(0.0, 0.42, abs(a.x)) * influence * envelope * breath;',
+      '  float width = 0.072;',
+      '  float fold = sin(a.y * PI);',
+      '  vec3 p = vec3(a.x + bend + side * (a.y - 0.5) * width, a.z, 0.14 * fold + 0.2 * influence * envelope);',
+      '  p.z += 0.016 * sin(a.z * 3.0 + a.x * 4.0 + uTime * 0.6) * influence;',
+      '  return p;',
+      '}',
+      'vec3 rotateView(vec3 p){',
+      '  float yaw = uPointer.x * 0.065;',
+      '  float pitch = -uPointer.y * 0.04;',
+      '  float cy = cos(yaw), sy = sin(yaw);',
+      '  p.xz = vec2(p.x * cy - p.z * sy, p.x * sy + p.z * cy);',
+      '  float cp = cos(pitch), sp = sin(pitch);',
+      '  p.yz = vec2(p.y * cp - p.z * sp, p.y * sp + p.z * cp);',
+      '  return p;',
+      '}',
+      'void main(){',
+      '  vec3 p = surface(aRibbon);',
+      '  vec3 du = surface(aRibbon + vec3(0.0, 0.002, 0.0)) - p;',
+      '  vec3 dv = surface(aRibbon + vec3(0.0, 0.0, 0.002)) - p;',
+      '  vNormal = normalize(rotateView(cross(du, dv)));',
+      '  p = rotateView(p);',
+      '  vPosition = p;',
+      '  vRibbon = aRibbon.xy;',
+      '  float viewHeight = 1.12;',
+      '  float viewWidth = max(uAspect * viewHeight, 1.2);',
+      '  float depth = 3.8 - p.z;',
+      '  gl_Position = vec4(p.x * 3.8 / viewWidth, p.y * 3.8 / viewHeight, (depth - 2.0) * 0.4, depth);',
+      '}'
+    ].join('\n');
+  }
+
+  function fragmentSource(gl) {
+    var P = precisionPrefix(gl);
+    return [
+      'precision ' + P + ' float;',
+      'uniform float uTime;',
+      'uniform vec2 uPointer;',
+      'varying vec3 vPosition;',
+      'varying vec3 vNormal;',
+      'varying vec2 vRibbon;',
+      'vec3 pointLight(vec3 pos, vec3 tint, vec3 n, vec3 p, vec3 eye){',
+      '  vec3 delta = pos - p;',
+      '  float d2 = dot(delta, delta);',
+      '  vec3 dir = normalize(delta);',
+      '  float diffuse = max(dot(n, dir), 0.0);',
+      '  float spec = pow(max(dot(n, normalize(dir + eye)), 0.0), 42.0);',
+      '  return tint * (diffuse * 0.32 + spec * 1.5) / (0.35 + d2 * 2.7);',
+      '}',
+      'void main(){',
+      '  vec3 n = normalize(vNormal);',
+      '  vec3 eye = normalize(vec3(0.0, 0.0, 3.8) - vPosition);',
+      '  if (dot(n, eye) < 0.0) n = -n;',
+      '  float side = sign(vRibbon.x);',
+      '  vec3 color = vec3(0.002, 0.01, 0.014);',
+      '  vec3 drift = uPointer * 0.18;',
+      '  float breathe = 0.96 + 0.04 * sin(uTime * 0.7);',
+      '  color += pointLight(vec3(side * 0.48 + drift.x, 0.8 + drift.y, 0.42), vec3(0.28, 1.0, 0.43), n, vPosition, eye) * breathe;',
+      '  color += pointLight(vec3(side * 0.55 + drift.x, -0.78 + drift.y, 0.45), vec3(0.08, 0.92, 0.8), n, vPosition, eye);',
+      '  color += pointLight(vec3(side * 1.13, 0.05 + drift.y, 0.38), vec3(0.01, 0.53, 0.79), n, vPosition, eye) * 0.65;',
+      '  float edge = exp(-pow((vRibbon.y - 0.12) / 0.055, 2.0));',
+      '  float contour = exp(-pow((abs(vPosition.x) - 0.75) / 0.42, 2.0));',
+      '  float ends = exp(-pow((abs(vPosition.y) - 0.74) / 0.2, 2.0));',
+      '  color += vec3(0.035, 0.4, 0.43) * edge * (contour * 0.55 + ends * 0.35);',
+      '  float sheen = exp(-pow((vRibbon.y - 0.23) / 0.27, 2.0));',
+      '  float inner = exp(-pow(vRibbon.x / 0.85, 2.0));',
+      '  vec3 neon = mix(vec3(0.035, 0.76, 0.78), vec3(0.24, 1.0, 0.35), smoothstep(0.58, 0.8, abs(vPosition.y)));',
+      '  color += neon * ends * inner * sheen * 1.35;',
+      '  float shade = 1.0 - 0.98 * exp(-pow(vPosition.x / 0.62, 6.0)) * exp(-pow(vPosition.y / 0.61, 6.0));',
+      '  color *= shade * exp(-0.95 * vPosition.x * vPosition.x);',
+      '  color = 1.0 - exp(-color * 1.7);',
+      '  gl_FragColor = vec4(pow(color, vec3(0.85)), 1.0);',
+      '}'
+    ].join('\n');
+  }
+
+  function compile(gl, type, src) {
+    var sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+      console.warn('shader:', gl.getShaderInfoLog(sh));
+      gl.deleteShader(sh);
+      return null;
+    }
+    return sh;
+  }
+
+  function build() {
+    program = gl.createProgram();
+    var vs = compile(gl, gl.VERTEX_SHADER, vertexSource());
+    var fs = compile(gl, gl.FRAGMENT_SHADER, fragmentSource(gl));
+    if (!vs || !fs) return false;
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.warn('link:', gl.getProgramInfoLog(program));
+      return false;
+    }
+    gl.useProgram(program);
+
+    var RIBBONS = 48, ROWS = 97, COLS = 11;
+    var vertices = new Float32Array(RIBBONS * ROWS * COLS * 3);
+    var indices = new Uint16Array(RIBBONS * (ROWS - 1) * (COLS - 1) * 6);
+    var vi = 0, ii = 0;
+    for (var r = 0; r < RIBBONS; r++) {
+      var x = (r - 23.5) * 0.079;
+      var base = r * ROWS * COLS;
+      for (var row = 0; row < ROWS; row++) {
+        var z = -1.6 + row / 96 * 3.2;
+        for (var col = 0; col < COLS; col++) {
+          vertices[vi++] = x;
+          vertices[vi++] = col / 10;
+          vertices[vi++] = z;
+        }
+      }
+      for (var rr = 0; rr < ROWS - 1; rr++) {
+        for (var cc = 0; cc < COLS - 1; cc++) {
+          var a = base + rr * COLS + cc;
+          var b = a + COLS;
+          indices[ii++] = a; indices[ii++] = a + 1; indices[ii++] = b;
+          indices[ii++] = a + 1; indices[ii++] = b + 1; indices[ii++] = b;
+        }
+      }
+    }
+    count = indices.length;
+
+    buffers = {};
+    var vbo = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    var ibo = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(program, 'aRibbon');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 3, gl.FLOAT, false, 0, 0);
+    buffers = { vbo: vbo, ibo: ibo, loc: loc };
+
+    uniforms = {
+      uTime: gl.getUniformLocation(program, 'uTime'),
+      uAspect: gl.getUniformLocation(program, 'uAspect'),
+      uPointer: gl.getUniformLocation(program, 'uPointer')
+    };
+    return true;
+  }
+
+  function resize() {
+    if (!gl || !needsResize) return;
+    var ratio = window.matchMedia('(max-width: 640px)').matches ? 1.25 : 1.5;
+    var w = Math.max(1, Math.round(hero.clientWidth * ratio));
+    var h = Math.max(1, Math.round(hero.clientHeight * ratio));
+    canvas.width = w; canvas.height = h;
+    gl.viewport(0, 0, w, h);
+    gl.uniform1f(uniforms.uAspect, w / h);
+    needsResize = false;
+  }
+
+  function tick(now) {
+    frame = 0;
+    if (lost || document.hidden || !visible) return;
+    var dt = previous ? Math.min((now - previous) / 1000, 0.05) : 0;
+    previous = now;
+    if (!reduced.matches) time += dt;
+    var smooth = 1 - Math.exp(-dt * 4);
+    pointer.x += (target.x - pointer.x) * (dt ? smooth : 1);
+    pointer.y += (target.y - pointer.y) * (dt ? smooth : 1);
+    gl.uniform1f(uniforms.uTime, time);
+    var px = reduced.matches ? 0 : pointer.x;
+    var py = reduced.matches ? 0 : pointer.y;
+    gl.uniform2f(uniforms.uPointer, px, py);
+    if (needsResize) resize();
+    gl.clearColor(0.002, 0.008, 0.007, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.drawElements(gl.TRIANGLES, count, gl.UNSIGNED_SHORT, 0);
+    if (!reduced.matches) frame = requestAnimationFrame(tick);
+  }
+
+  function resume() {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    previous = 0;
+    if (needsResize) resize();
+    if (gl && !lost) frame = requestAnimationFrame(tick);
+  }
+
+  function init() {
+    gl = canvas.getContext('webgl', { alpha: false, antialias: true, powerPreference: 'low-power' });
+    if (!gl) { hero.classList.add('hero--fallback'); canvas.style.display = 'none'; return; }
+    gl.enable(gl.DEPTH_TEST);
+    if (!build()) { hero.classList.add('hero--fallback'); canvas.style.display = 'none'; return; }
+
+    hero.addEventListener('pointermove', function (e) {
+      var rect = hero.getBoundingClientRect();
+      target.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      target.y = 1 - ((e.clientY - rect.top) / rect.height) * 2;
+    });
+    hero.addEventListener('pointerleave', function () { target.x = 0; target.y = 0; });
+
+    var io = new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) resume();
+    });
+    io.observe(hero);
+
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) resume();
+    });
+    window.addEventListener('resize', function () { needsResize = true; }, { passive: true });
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () { needsResize = true; resume(); }).observe(hero);
+    }
+    reduced.addEventListener && reduced.addEventListener('change', resume);
+
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      lost = true;
+      canvas.style.display = 'none';
+      hero.classList.add('hero--fallback');
+      console.warn('Lumen One: contexto WebGL perdido, fallback ativo.');
+    });
+    canvas.addEventListener('webglcontextrestored', function () {
+      lost = false;
+      if (!build()) return;
+      canvas.style.display = '';
+      hero.classList.remove('hero--fallback');
+      needsResize = true;
+      resume();
+    });
+
+    needsResize = true;
+    resume();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
