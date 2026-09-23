@@ -570,8 +570,9 @@
       overflow: hidden;
       padding-bottom: 0.5rem;
     }
-    .marquee-row { overflow: visible; touch-action: pan-y; cursor: grab; }
-    .marquee-row:active { cursor: grabbing; }
+    .marquee-row { overflow: visible; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+        .marquee-row:active { cursor: grabbing; }
+        .marquee-tile, .marquee-frame { -webkit-user-drag: none; user-select: none; }
     .marquee-track {
       display: flex; gap: 12px;
       width: max-content;
@@ -646,8 +647,9 @@
           -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
         }
-        .nichos-row { touch-action: pan-y; cursor: grab; }
-        .nichos-row:active { cursor: grabbing; }
+        .nichos-row { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+                .nichos-row:active { cursor: grabbing; }
+                .nicho-card { -webkit-user-drag: none; }
         .nichos-track {
               display: flex; gap: 1rem;
               width: max-content;
@@ -938,6 +940,10 @@
       <div class="portfolio-marquee">
         <div class="marquee-row" data-marquee-dir="right">
                   <div class="marquee-track">
+                              <div class="marquee-frame marquee-frame--video">
+                                            <iframe src="https://player.vimeo.com/video/1229654422?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                          </div>
+                                          <img class="marquee-tile" src="images/stories-02.png" alt="Modelo de landing page de curso de stories" loading="lazy" decoding="async">
                               <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional" loading="lazy" decoding="async">
                                           <div class="marquee-frame marquee-frame--video">
                                                                                       <iframe src="https://player.vimeo.com/video/1229633595?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -948,7 +954,10 @@
                     <div class="marquee-frame">
                       <iframe src="modelos/aurea-residences/index.html" title="Modelo Aurea Residences" loading="lazy" tabindex="-1"></iframe>
                     </div>
-                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas" loading="lazy" decoding="async">
+                    <img class="marquee-tile" src="images/psicologa-04.png" alt="Modelo de landing page de psicóloga" loading="lazy" decoding="async">
+                                <div class="marquee-frame marquee-frame--video">
+                                  <iframe src="https://player.vimeo.com/video/1229660478?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                </div>
                   </div>
                 </div>
                 <div class="marquee-row" data-marquee-dir="left">
@@ -1607,14 +1616,14 @@
           var now = performance.now();
           var dx = e.clientX - lastX;
           var dt = Math.max((now - lastT) / 1000, 0.001);
-          p += dx; apply();
+          p -= dx; apply();
           vel = dx / dt;
           lastX = e.clientX; lastT = now;
         });
         function release() {
           if (!dragging) return;
           dragging = false;
-          momentum = Math.max(-4000, Math.min(4000, vel)); // inércia limitada
+          momentum = -Math.max(-4000, Math.min(4000, vel)); // inércia limitada (mesma direção do arrasto)
         }
         window.addEventListener('pointerup', release);
         window.addEventListener('pointercancel', release);
