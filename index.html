@@ -600,6 +600,15 @@
     }
 
     /* ═══ MARQUEE DE SCROLL (portfólio) ═══ */
+    #modelos {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5.5rem !important;
+      padding-bottom: 3rem !important;
+    }
+    #modelos .kit-container { width: 100%; }
     .portfolio-marquee {
       display: flex; flex-direction: column; gap: 12px;
       overflow: hidden;
@@ -610,6 +619,21 @@
       display: flex; gap: 12px;
       width: max-content;
       will-change: transform;
+      animation: marquee-right 60s linear infinite;
+    }
+    .marquee-row[data-marquee-dir="left"] .marquee-track {
+      animation-name: marquee-left;
+    }
+    @keyframes marquee-right {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-33.3333%, 0, 0); }
+    }
+    @keyframes marquee-left {
+      from { transform: translate3d(-33.3333%, 0, 0); }
+      to   { transform: translate3d(0, 0, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
     }
     .marquee-tile {
       flex-shrink: 0;
@@ -617,6 +641,8 @@
       aspect-ratio: 420 / 270;
       height: auto;
       object-fit: cover;
+      object-position: center 70%;
+      filter: brightness(1.45) saturate(1.15);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
@@ -684,7 +710,7 @@
 
     #modelos {
       background: linear-gradient(to bottom, #000000 0%, #0a0f1c 180px) !important;
-      margin-top: -2px !important;
+      /* sem margin-top: margem em elemento pinado causa salto no GSAP */
     }
 
     #tubes-section .kit-glow-line {
@@ -813,14 +839,14 @@
 
 
   <!-- ═══ BLOCO 2: Portfólio / Carousel ═══ -->
-  <section id="modelos" class="kit-section kit-portfolio kit-bg-deep" data-anim="portfolio-section">
+  <section id="modelos" class="kit-section kit-portfolio kit-bg-deep">
     <div class="kit-container">
       <div class="kit-section-header" data-anim="fade-up">
         <span class="kit-label kit-label-alt">portfólio</span>
         <h2 class="kit-h1">Projetos que já <span class="kit-text-gradient-blue">estão no AR</span></h2>
       </div>
 
-      <div class="portfolio-marquee" data-anim="fade-up" data-anim-delay="0.2">
+      <div class="portfolio-marquee">
         <div class="marquee-row" data-marquee-dir="right">
           <div class="marquee-track">
             <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page" loading="lazy" decoding="async">
@@ -1427,44 +1453,11 @@
     });
   </script>
 
-  <!-- ═══ Marquee de scroll: 2 fileiras em direções opostas ═══ -->
+  <!-- ═══ Marquee: animação CSS pura (sem JS de scroll) — só triplica o conteúdo para o loop ═══ -->
   <script>
     (function () {
-      var section = document.getElementById('modelos');
-      if (!section) return;
-      var tracks = section.querySelectorAll('.marquee-track');
-      if (!tracks.length) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      // Triplica o conteúdo para loop perfeito (como no prompt de referência)
+      var tracks = document.querySelectorAll('#modelos .marquee-track');
       tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
-
-      var sectionTop = 0;
-      function measure() {
-        sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      }
-
-      function update() {
-        var o = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-        tracks.forEach(function (t) {
-          var dir = t.parentElement.getAttribute('data-marquee-dir');
-          var x = dir === 'left' ? -(o - 200) : (o - 200);
-          t.style.transform = 'translate3d(' + x + 'px, 0, 0)';
-        });
-      }
-
-      var ticking = false;
-      window.addEventListener('scroll', function () {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(function () { update(); ticking = false; });
-        }
-      }, { passive: true });
-      window.addEventListener('resize', function () { measure(); update(); }, { passive: true });
-
-      measure();
-      update();
-      window.addEventListener('load', function () { measure(); update(); });
     })();
   </script>
 
