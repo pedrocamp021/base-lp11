@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurea Residences | Viver é escolher o extraordinário</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #151917;
+      color: #f6f5f1;
+      font-family: Manrope, sans-serif;
+      min-height: 100vh;
+    }
+
+    main#inicio {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
+      background: url("https://res.cloudinary.com/dalwymbky/image/upload/v1785342846/hero1_obujcd.jpg") center center / cover no-repeat;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px clamp(24px, 5vw, 78px);
+      gap: clamp(21px, 3vw, 46px);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand__mark {
+      width: 29px; height: 29px;
+      border: 1px solid rgba(246,245,241,.85);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Playfair Display", serif;
+      font-style: italic; font-weight: 500;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .brand__wordmark { line-height: .9; }
+    .brand__name {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 500;
+    }
+    .brand__sub {
+      display: block;
+      margin-top: 5px;
+      font-size: 7px;
+      letter-spacing: .24em;
+      color: rgba(246,245,241,.72);
+      text-transform: uppercase;
+    }
+    nav[aria-label="Navegação principal"] {
+      display: flex;
+      align-items: center;
+      gap: clamp(21px, 3vw, 46px);
+    }
+    nav a {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      color: rgba(246,245,241,.72);
+      text-decoration: none;
+      transition: color .25s ease;
+    }
+    nav a:hover { color: #f6f5f1; }
+    .menu-btn {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(246,245,241,.35);
+      background: transparent;
+      padding: 7px 4px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .menu-btn span {
+      display: block;
+      width: 13px; height: 1px;
+      background: #f6f5f1;
+    }
+
+    /* Conteúdo absoluto (não interativo) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    h1#hero-title {
+      position: absolute;
+      top: 13%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1080px, 94vw);
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: clamp(44px, 6.5vw, 96px);
+      letter-spacing: -.065em;
+      line-height: .88;
+      white-space: nowrap;
+      animation: headline-rise .85s ease-out .15s both;
+    }
+    h1#hero-title em {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: .83em;
+      letter-spacing: -.07em;
+      text-transform: none;
+    }
+    .hero-sub {
+      position: absolute;
+      left: clamp(24px, 5vw, 78px);
+      bottom: clamp(64px, 9vh, 92px);
+      max-width: 570px;
+      margin: 0;
+      color: #f6f5f1;
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(19px, 2vw, 28px);
+      line-height: 1.03;
+      animation: text-rise .85s ease-out .45s both;
+    }
+    @keyframes headline-rise {
+      from { opacity: 0; transform: translate(-50%, 28px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+    @keyframes text-rise {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      h1#hero-title, .hero-sub { animation: none; }
+    }
+
+    /* Footer / selector */
+    .hero-footer {
+      margin-top: auto;
+      padding: 0 clamp(24px, 5vw, 78px) 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .bg-selector {
+      position: absolute;
+      right: clamp(42px, 8vw, 120px);
+      bottom: clamp(96px, 17vh, 150px);
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(246,245,241,.45);
+      background: rgba(15,20,18,.18);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    .bg-selector button {
+      min-width: 35px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: rgba(246,245,241,.65);
+      font-family: Manrope, sans-serif;
+      font-size: 9px;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: background .25s ease, color .25s ease;
+      pointer-events: auto;
+    }
+    .bg-selector button:hover,
+    .bg-selector button.is-active {
+      background: #f6f5f1;
+      color: #151917;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 22px clamp(24px, 5vw, 78px) 22px; }
+      nav a { display: none; }
+      h1#hero-title {
+        top: 21%;
+        width: calc(100vw - 20px);
+        font-size: clamp(38px, 11.8vw, 48px);
+        white-space: normal;
+      }
+      .hero-sub {
+        left: 24px;
+        bottom: 66px;
+        max-width: 82vw;
+        font-size: 21px;
+      }
+      main#inicio { background-position: 61% center; }
+      .bg-selector {
+        right: clamp(24px, 5vw, 78px);
+        bottom: 170px;
+      }
+      .bg-selector button { min-width: 32px; padding: 5px 6px; }
+      .hero-footer { padding-bottom: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main id="inicio">
+    <header>
+      <a class="brand" href="#inicio">
+        <span class="brand__mark">A</span>
+        <span class="brand__wordmark">
+          Aurea
+          <span class="brand__sub">Residences</span>
+        </span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#projeto">O Projeto</a>
+        <a href="#contato">Contato</a>
+        <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <div class="hero-overlay" aria-hidden="true">
+      <section aria-labelledby="hero-title">
+        <h1 id="hero-title">Seu espaço para<br><em>viver o essencial.</em></h1>
+        <p class="hero-sub">Residências contemporâneas desenhadas para aproximar você da natureza, do conforto e de tudo o que realmente importa.</p>
+      </section>
+    </div>
+
+    <div class="hero-footer">
+      <div class="bg-selector" role="group" aria-label="Selecionar iluminação">
+        <button class="is-active" aria-pressed="true" data-bg="https://res.cloudinary.com/dalwymbky/image/upload/v1785342846/hero1_obujcd.jpg">ON</button>
+        <button aria-pressed="false" data-bg="https://res.cloudinary.com/dalwymbky/image/upload/v1785342846/hero2_uohnmg.jpg">OFF</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var hero = document.getElementById('inicio');
+      var buttons = document.querySelectorAll('.bg-selector button');
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) {
+            b.classList.toggle('is-active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          hero.style.backgroundImage = 'url("' + btn.getAttribute('data-bg') + '")';
+        });
+      });
+      var menuBtn = document.querySelector('.menu-btn');
+      menuBtn.addEventListener('click', function () {
+        var open = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        document.body.classList.toggle('menu-open', !open);
+      });
+
+      // Dentro de um iframe (card de vitrine): alterna ON/OFF automaticamente a cada 2s
+      var inIframe = window.self !== window.parent;
+      if (inIframe) {
+        var idx = 0;
+        setInterval(function () {
+          idx = (idx + 1) % buttons.length;
+          var btn = buttons[idx];
+          buttons.forEach(function (b) {
+            b.classList.toggle('is-active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          hero.style.backgroundImage = 'url("' + btn.getAttribute('data-bg') + '")';
+        }, 1000);
+      }
+    })();
+  </script>
+</body>
+</html>

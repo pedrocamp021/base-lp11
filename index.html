@@ -592,18 +592,136 @@
       .marquee-track { animation: none; }
     }
     .marquee-tile {
-      flex-shrink: 0;
-      width: min(420px, 78vw);
-      aspect-ratio: 420 / 270;
-      height: auto;
-      object-fit: cover;
-      object-position: center 70%;
-      filter: brightness(1.45) saturate(1.15);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
-      background: #0a0f1c;
-    }
+          flex-shrink: 0;
+          width: min(420px, 78vw);
+          aspect-ratio: 420 / 270;
+          height: auto;
+          object-fit: cover;
+          object-position: center 70%;
+          filter: brightness(1.45) saturate(1.15);
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
+          background: #0a0f1c;
+        }
+        /* Card de modelo VIVO: iframe do site real renderizado em 1280px e reduzido pra caber */
+        .marquee-frame {
+          position: relative;
+          flex-shrink: 0;
+          width: min(420px, 78vw);
+          aspect-ratio: 420 / 270;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          box-shadow: 0 0 0 1px rgba(10, 116, 255, 0.12), 0 16px 44px rgba(0, 0, 0, 0.45);
+          background: #0a0f1c;
+          transform: translateZ(0);
+        }
+        .marquee-frame iframe {
+              display: block;
+              width: 1280px;
+              height: 823px;
+              border: 0;
+              transform-origin: 0 0;
+              transform: scale(var(--frame-scale, 0.328));
+              pointer-events: none;
+              background: #151917;
+            }
+            /* Card de vídeo (Vimeo): o player preenche o card inteiro, sem escala */
+            .marquee-frame--video iframe {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              transform: none;
+            }
+
+    /* ═══ NICOS ATENDIDOS (marquee 2 fileiras) ═══ */
+        .nichos-section { background: var(--bg-deep); }
+        .nichos-marquee {
+          display: flex; flex-direction: column; gap: 1rem;
+          overflow: hidden;
+          margin-top: var(--kit-gap-xl);
+          -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+        .nichos-track {
+              display: flex; gap: 1rem;
+              width: max-content;
+              will-change: transform;
+              animation: nichos-right 48s linear infinite;
+            }
+            .nichos-row[data-nichos-dir="right"] .nichos-track { animation-duration: 32s; }
+            .nichos-row[data-nichos-dir="left"] .nichos-track { animation-name: nichos-left; }
+    .marquee-row[data-marquee-dir="right"] .marquee-track { animation-duration: 42s; }
+        @keyframes nichos-right {
+          from { transform: translate3d(0, 0, 0); }
+          to   { transform: translate3d(-33.3333%, 0, 0); }
+        }
+        @keyframes nichos-left {
+          from { transform: translate3d(-33.3333%, 0, 0); }
+          to   { transform: translate3d(0, 0, 0); }
+        }
+        @media (prefers-reduced-motion: reduce) { .nichos-track { animation: none; } }
+        .nicho-card {
+              flex-shrink: 0;
+              display: flex; align-items: center; gap: 1rem;
+              width: min(21rem, 78vw);
+              padding: 1.1rem 1.3rem;
+              border-radius: 16px;
+              border: 1px solid transparent;
+              background:
+                linear-gradient(160deg, rgba(13, 27, 58, 0.6), rgba(10, 15, 28, 0.92)) padding-box,
+                linear-gradient(135deg, rgba(10, 116, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 38%, rgba(255, 255, 255, 0.06) 60%, rgba(10, 116, 255, 0.35) 100%) border-box;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+              transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+        .nicho-icon {
+          flex-shrink: 0;
+          width: 2.75rem; height: 2.75rem;
+          display: flex; align-items: center; justify-content: center;
+          border-radius: 11px;
+          font-size: 1.3rem;
+          background: rgba(10, 116, 255, 0.12);
+          border: 1px solid rgba(10, 116, 255, 0.28);
+          box-shadow: 0 0 18px rgba(10, 116, 255, 0.12);
+        }
+        .nicho-name {
+          margin: 0;
+          font-family: var(--font-display); font-weight: 700;
+          font-size: 1.05rem; line-height: 1.2; letter-spacing: -0.01em;
+          color: #f2f6fc;
+        }
+        .nicho-desc { margin: 0.25rem 0 0; font-size: 0.82rem; line-height: 1.35; color: var(--text-secondary); }
+        .nichos-more {
+              margin: 1.5rem auto 0;
+              display: flex; align-items: center; justify-content: center;
+              max-width: 640px;
+              padding: 1.1rem 1.5rem;
+              border-radius: 14px;
+              border: 1px solid transparent;
+              background:
+                rgba(10, 116, 255, 0.06) padding-box,
+                linear-gradient(135deg, rgba(10, 116, 255, 0.5) 0%, rgba(10, 116, 255, 0.12) 45%, rgba(10, 116, 255, 0.5) 100%) border-box;
+              font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em;
+              color: #bcd7ff;
+              text-align: center;
+              box-shadow: 0 8px 26px rgba(10, 116, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            }
+        .nichos-marquee .nicho-card:hover {
+              transform: translateY(-3px);
+              box-shadow: 0 14px 40px rgba(10, 116, 255, 0.18), 0 0 0 1px rgba(10, 116, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            }
+        @media (max-width: 767px) {
+              .nichos-marquee { gap: 0.65rem; }
+              .nichos-track { gap: 0.65rem; animation-duration: 34s; }
+              .nichos-row[data-nichos-dir="right"] .nichos-track { animation-duration: 24s; }
+          .nicho-card { width: min(15.5rem, 74vw); padding: 0.9rem 1rem; gap: 0.75rem; border-radius: 12px; }
+          .nicho-icon { width: 2.3rem; height: 2.3rem; font-size: 1.1rem; border-radius: 9px; }
+          .nicho-name { font-size: 0.92rem; }
+          .nicho-desc { font-size: 0.72rem; }
+          .nichos-more { padding: 0.9rem 1rem; font-size: 0.85rem; }
+        }
 
     /* ═══ DEPOIMENTOS ═══ */
     .depo-section { background: var(--bg-deep); }
@@ -816,34 +934,28 @@
 
       <div class="portfolio-marquee">
         <div class="marquee-row" data-marquee-dir="right">
-          <div class="marquee-track">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — portfólio" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site de agendamento" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page de captura" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço 2" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <div class="marquee-row" data-marquee-dir="left">
-          <div class="marquee-track">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 3" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 3" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de serviço 3" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — portfólio 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site de agendamento 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page de captura 2" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 4" loading="lazy" decoding="async">
-            <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 4" loading="lazy" decoding="async">
-          </div>
-        </div>
+                  <div class="marquee-track">
+                              <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional" loading="lazy" decoding="async">
+                                          <div class="marquee-frame marquee-frame--video">
+                                                                                      <iframe src="https://player.vimeo.com/video/1229633595?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                                                                    </div>
+                                                                                    <div class="marquee-frame marquee-frame--video">
+                                                                <iframe src="https://player.vimeo.com/video/1229036616?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                    <div class="marquee-frame">
+                      <iframe src="modelos/aurea-residences/index.html" title="Modelo Aurea Residences" loading="lazy" tabindex="-1"></iframe>
+                    </div>
+                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas" loading="lazy" decoding="async">
+                  </div>
+                </div>
+                <div class="marquee-row" data-marquee-dir="left">
+                  <div class="marquee-track">
+                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — landing page 3" loading="lazy" decoding="async">
+                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional 3" loading="lazy" decoding="async">
+                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — menu digital 2" loading="lazy" decoding="async">
+                    <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — página de vendas 2" loading="lazy" decoding="async">
+                  </div>
+                </div>
       </div>
     </div>
   </section>
@@ -865,21 +977,21 @@
           <div class="kit-card page-before-after__box page-before-after__box--before">
             <ul class="page-before-after__list">
               <li class="page-before-after__item">
-                <span class="page-before-after__icon">✕</span>
-                <p class="kit-body-sm">Tentou montar um site sozinho e terminou com algo que <strong>não passa confiança</strong>.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✕</span>
-                <p class="kit-body-sm">Perdeu horas em ferramentas e tutoriais e ficou com a sensação de <strong>"perdi tempo e não saiu nada"</strong>.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✕</span>
-                <p class="kit-body-sm">Perde clientes que clicam no seu link e <strong>desistem pela aparência da página</strong>.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✕</span>
-                <p class="kit-body-sm">Recebeu orçamentos absurdos de agências para <strong>algo que deveria ser simples</strong>.</p>
-              </li>
+                              <span class="page-before-after__icon">✕</span>
+                              <p class="kit-body-sm"><strong>Seu negócio não aparece no Google</strong>, e o cliente que te procura acaba fechando com o concorrente que aparece.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✕</span>
+                              <p class="kit-body-sm"><strong>Você vive de um link na bio genérico</strong>, que não mostra seu trabalho, não gera confiança e não vende nada por você.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✕</span>
+                              <p class="kit-body-sm"><strong>Sua página é antiga ou fraca</strong>, e o visitante clica, olha, desconfia e sai sem falar com você.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✕</span>
+                              <p class="kit-body-sm"><strong>Você sabe que seu negócio pode crescer mais</strong>, mas a presença digital hoje não acompanha o tamanho que ele quer ter.</p>
+                            </li>
             </ul>
           </div>
         </div>
@@ -889,21 +1001,21 @@
           <div class="kit-card page-before-after__box page-before-after__box--after">
             <ul class="page-before-after__list">
               <li class="page-before-after__item">
-                <span class="page-before-after__icon">✓</span>
-                <p class="kit-body-sm">Ter um site profissional <strong>sem mexer em nada de design ou código</strong>.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✓</span>
-                <p class="kit-body-sm">Receber uma página <strong>feita para o seu nicho</strong>, com estrutura e textos que convertem.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✓</span>
-                <p class="kit-body-sm">Passar <strong>confiança e credibilidade</strong> de primeira, quando o cliente abrir seu link.</p>
-              </li>
-              <li class="page-before-after__item">
-                <span class="page-before-after__icon">✓</span>
-                <p class="kit-body-sm">Ter um orçamento <strong>justo e transparente</strong>, direto no WhatsApp, sem enrolação.</p>
-              </li>
+                              <span class="page-before-after__icon">✓</span>
+                              <p class="kit-body-sm"><strong>Existir de verdade no Google</strong>, com uma página profissional que trabalha por você 24h por dia.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✓</span>
+                              <p class="kit-body-sm"><strong>Trocar o link da bio por uma página que vende</strong>: apresenta seu trabalho, prova valor e manda o cliente pro WhatsApp.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✓</span>
+                              <p class="kit-body-sm"><strong>Ter uma página atualizada e feita pro seu nicho</strong>, com design e copy que transformam visita em conversa.</p>
+                            </li>
+                            <li class="page-before-after__item">
+                              <span class="page-before-after__icon">✓</span>
+                              <p class="kit-body-sm"><strong>Passar profissionalismo de primeira</strong>, desde o primeiro clique, com orçamento justo e direto no WhatsApp.</p>
+                            </li>
             </ul>
           </div>
         </div>
@@ -915,11 +1027,51 @@
         </a>
       </div>
     </div>
-  </section>
+      </section>
 
+      <!-- ═══ BLOCO 3.4: NICOS ATENDIDOS ═══ -->
+      <section id="nichos" class="kit-section nichos-section" data-anim="benefits-section">
+        <div class="kit-container">
+          <div class="kit-section-header" data-anim="fade-up">
+            <span class="kit-label kit-label-alt">nichos</span>
+            <h2 class="kit-h1">Páginas para <span class="kit-text-gradient-blue">todo tipo de negócio</span></h2>
+            <p class="kit-body-lg" style="margin: 1rem auto 0; max-width: 720px;">
+              Cada mercado tem uma forma de vender. A página da Base Code nasce com design, copy e estrutura pensados para o seu nicho, não com template genérico.
+            </p>
+          </div>
+
+          <div class="nichos-marquee" data-anim="fade-up" data-anim-delay="0.15">
+                  <div class="nichos-row" data-nichos-dir="right">
+                    <div class="nichos-track">
+                      <div class="nicho-card"><span class="nicho-icon">🎓</span><div><h3 class="nicho-name">Cursos e Mentorias</h3><p class="nicho-desc">Matrículas pelo WhatsApp</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">💚</span><div><h3 class="nicho-name">Saúde e Bem Estar</h3><p class="nicho-desc">Agendamento de consultas</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">✨</span><div><h3 class="nicho-name">Beleza e Estética</h3><p class="nicho-desc">Agenda cheia via página</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">🤝</span><div><h3 class="nicho-name">Consultoria de RH</h3><p class="nicho-desc">Autoridade e leads qualificados</p></div></div>
+                    </div>
+                  </div>
+                  <div class="nichos-row" data-nichos-dir="left">
+                    <div class="nichos-track">
+                      <div class="nicho-card"><span class="nicho-icon">🚀</span><div><h3 class="nicho-name">Marketing e Tech</h3><p class="nicho-desc">Portfólio e captura de leads</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">🏠</span><div><h3 class="nicho-name">Imobiliárias</h3><p class="nicho-desc">Imóveis em destaque e contato</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">⚖️</span><div><h3 class="nicho-name">Advocacia</h3><p class="nicho-desc">Credibilidade que gera consultas</p></div></div>
+                      <div class="nicho-card"><span class="nicho-icon">💼</span><div><h3 class="nicho-name">Empresariais</h3><p class="nicho-desc">Institucional que vende a empresa</p></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="nichos-more" data-anim="fade-up" data-anim-delay="0.25">+ muito mais: se o seu negócio precisa vender online, a gente cria a página certa pra isso.</div>
+        </div>
+      </section>
+
+        <!-- ═══ Marquee dos nichos: animação CSS pura, só triplica o conteúdo para o loop ═══ -->
+  <script>
+    (function () {
+      var tracks = document.querySelectorAll('#nichos .nichos-track');
+      tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
+    })();
+  </script>
 
   <!-- ═══ BLOCO 3.5: CARDS EMPILHADOS (drag) ═══ -->
-  <section id="arco" class="flick-section" aria-label="Portfólio de serviços" data-flick-cards-init>
+        <section id="arco" class="flick-section" aria-label="Portfólio de serviços" data-flick-cards-init>
     <div class="flick-container">
       <div class="flick-intro" data-anim="fade-up">
         <span class="kit-label kit-label-alt">portfólio</span>
@@ -1410,11 +1562,21 @@
 
   <!-- ═══ Marquee: animação CSS pura (sem JS de scroll) — só triplica o conteúdo para o loop ═══ -->
   <script>
-    (function () {
-      var tracks = document.querySelectorAll('#modelos .marquee-track');
-      tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
-    })();
-  </script>
+      (function () {
+        var tracks = document.querySelectorAll('#modelos .marquee-track');
+        tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
+        // Escala do iframe do modelo vivo: card width / 1280
+        function fitFrames() {
+          var frame = document.querySelector('#modelos .marquee-frame');
+          if (!frame) return;
+          var scale = frame.offsetWidth / 1280;
+          document.getElementById('modelos').style.setProperty('--frame-scale', scale);
+        }
+        window.addEventListener('resize', fitFrames, { passive: true });
+        window.addEventListener('load', fitFrames);
+        fitFrames();
+      })();
+    </script>
 
   <!-- ═══ Cards empilhados: drag horizontal com GSAP Draggable ═══ -->
   <script>
