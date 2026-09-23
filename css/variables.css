@@ -99,10 +99,10 @@
   --kit-gradient-blue-orb: linear-gradient(135deg, rgba(120,180,255,0.8) 0%, rgba(40,110,255,0.6) 40%, rgba(255,255,255,0.1) 100%);
 
   /* === TIPOGRAFIA === */
-  --kit-font-heading: 'Space Grotesk', sans-serif;
+  --kit-font-heading: 'Plus Jakarta Sans', sans-serif;
   --kit-font-body: 'Manrope', sans-serif;
   --kit-font-accent: 'Manrope', sans-serif;
-  --kit-font-alt: 'Space Grotesk', sans-serif;
+  --kit-font-alt: 'Plus Jakarta Sans', sans-serif;
 
   --kit-fs-display: clamp(3rem, 5vw + 1rem, 4rem);
   --kit-fs-hero-watermark: clamp(8rem, 15vw, 15.5rem);
