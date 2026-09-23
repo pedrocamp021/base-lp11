@@ -570,7 +570,8 @@
       overflow: hidden;
       padding-bottom: 0.5rem;
     }
-    .marquee-row { overflow: visible; }
+    .marquee-row { overflow: visible; touch-action: pan-y; cursor: grab; }
+    .marquee-row:active { cursor: grabbing; }
     .marquee-track {
       display: flex; gap: 12px;
       width: max-content;
@@ -645,6 +646,8 @@
           -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
         }
+        .nichos-row { touch-action: pan-y; cursor: grab; }
+        .nichos-row:active { cursor: grabbing; }
         .nichos-track {
               display: flex; gap: 1rem;
               width: max-content;
@@ -1062,15 +1065,7 @@
         </div>
       </section>
 
-        <!-- ═══ Marquee dos nichos: animação CSS pura, só triplica o conteúdo para o loop ═══ -->
-  <script>
-    (function () {
-      var tracks = document.querySelectorAll('#nichos .nichos-track');
-      tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
-    })();
-  </script>
-
-  <!-- ═══ BLOCO 3.5: CARDS EMPILHADOS (drag) ═══ -->
+        <!-- ═══ BLOCO 3.5: CARDS EMPILHADOS (drag) ═══ -->
         <section id="arco" class="flick-section" aria-label="Portfólio de serviços" data-flick-cards-init>
     <div class="flick-container">
       <div class="flick-intro" data-anim="fade-up">
@@ -1560,23 +1555,92 @@
     });
   </script>
 
-  <!-- ═══ Marquee: animação CSS pura (sem JS de scroll) — só triplica o conteúdo para o loop ═══ -->
+  <!-- ═══ Marquee interativo: roda automaticamente + arrastável (mouse e touch) com inércia ═══ -->
   <script>
-      (function () {
-        var tracks = document.querySelectorAll('#modelos .marquee-track');
-        tracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
-        // Escala do iframe do modelo vivo: card width / 1280
-        function fitFrames() {
-          var frame = document.querySelector('#modelos .marquee-frame');
-          if (!frame) return;
-          var scale = frame.offsetWidth / 1280;
-          document.getElementById('modelos').style.setProperty('--frame-scale', scale);
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Triplica o conteúdo para o loop
+      var allTracks = document.querySelectorAll('#modelos .marquee-track, #nichos .nichos-track');
+      allTracks.forEach(function (t) { t.innerHTML = t.innerHTML + t.innerHTML + t.innerHTML; });
+
+      // Escala do iframe do modelo vivo: card width / 1280
+      function fitFrames() {
+        var frame = document.querySelector('#modelos .marquee-frame');
+        if (!frame) return;
+        document.getElementById('modelos').style.setProperty('--frame-scale', frame.offsetWidth / 1280);
+      }
+      window.addEventListener('resize', fitFrames, { passive: true });
+      window.addEventListener('load', fitFrames);
+      fitFrames();
+
+      function liveMarquee(track, row) {
+        // Mantém a duração configurada no CSS antes de assumir o controle
+        var duration = parseFloat(getComputedStyle(track).animationDuration) || 60;
+        var dirSign = row.getAttribute('data-marquee-dir') === 'right' ||
+                      row.getAttribute('data-nichos-dir') === 'right' ? -1 : 1;
+        track.style.animation = 'none';
+
+        var copyW = 0, speed = 0;
+        function measure() {
+          copyW = track.scrollWidth / 3;
+          speed = copyW / duration; // px por segundo
         }
-        window.addEventListener('resize', fitFrames, { passive: true });
-        window.addEventListener('load', fitFrames);
-        fitFrames();
-      })();
-    </script>
+        measure();
+        window.addEventListener('resize', function () { measure(); }, { passive: true });
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(measure); }
+
+        var p = 0, momentum = 0, dragging = false, lastX = 0, lastT = 0, vel = 0;
+
+        function offset() { return ((p % copyW) + copyW) % copyW; }
+        function apply() { track.style.transform = 'translate3d(' + (-offset()) + 'px,0,0)'; }
+        apply();
+
+        row.addEventListener('pointerdown', function (e) {
+          if (e.button !== undefined && e.button !== 0) return;
+          dragging = true; lastX = e.clientX; lastT = performance.now(); momentum = 0; vel = 0;
+          try { row.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+        // Movimento escutado na window: funciona mesmo se o capture falhar
+        window.addEventListener('pointermove', function (e) {
+          if (!dragging) return;
+          var now = performance.now();
+          var dx = e.clientX - lastX;
+          var dt = Math.max((now - lastT) / 1000, 0.001);
+          p += dx; apply();
+          vel = dx / dt;
+          lastX = e.clientX; lastT = now;
+        });
+        function release() {
+          if (!dragging) return;
+          dragging = false;
+          momentum = Math.max(-4000, Math.min(4000, vel)); // inércia limitada
+        }
+        window.addEventListener('pointerup', release);
+        window.addEventListener('pointercancel', release);
+
+        var last = performance.now();
+        function tick(now) {
+          var dt = Math.min((now - last) / 1000, 0.05);
+          last = now;
+          if (!dragging) {
+            // inércia decai exponencialmente
+            momentum *= Math.pow(0.88, dt * 60);
+            if (Math.abs(momentum) < 5) momentum = 0;
+            p += (dirSign * speed + momentum) * dt;
+            apply();
+          }
+          requestAnimationFrame(tick);
+        }
+        if (!reduced) requestAnimationFrame(tick);
+      }
+
+      document.querySelectorAll('.marquee-row, .nichos-row').forEach(function (row) {
+        var track = row.querySelector('.marquee-track, .nichos-track');
+        if (track) liveMarquee(track, row);
+      });
+    })();
+  </script>
 
   <!-- ═══ Cards empilhados: drag horizontal com GSAP Draggable ═══ -->
   <script>
