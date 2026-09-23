@@ -13,7 +13,7 @@
 .kit-display {
   font-family: var(--kit-font-heading);
   font-size: var(--kit-fs-display);
-  font-weight: var(--kit-fw-medium);
+  font-weight: var(--kit-fw-extrabold);
   line-height: var(--kit-lh-tight);
   letter-spacing: var(--kit-ls-heading);
   color: var(--kit-text-heading);
@@ -32,7 +32,7 @@
 .kit-h1 {
   font-family: var(--kit-font-heading);
   font-size: var(--kit-fs-h1);
-  font-weight: var(--kit-fw-medium);
+  font-weight: var(--kit-fw-extrabold);
   line-height: var(--kit-lh-heading);
   letter-spacing: var(--kit-ls-heading);
   color: var(--kit-text-heading);
