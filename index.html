@@ -630,13 +630,15 @@
               background: #151917;
             }
             /* Card de vídeo (Vimeo): o player preenche o card inteiro, sem escala */
-            .marquee-frame--video iframe {
-              position: absolute;
-              inset: 0;
-              width: 100%;
-              height: 100%;
-              transform: none;
-            }
+            .marquee-frame--video iframe,
+                        .marquee-frame--video video {
+                          position: absolute;
+                          inset: 0;
+                          width: 100%;
+                          height: 100%;
+                          transform: none;
+                          object-fit: cover;
+                        }
 
     /* ═══ NICOS ATENDIDOS (marquee 2 fileiras) ═══ */
         .nichos-section { background: var(--bg-deep); }
@@ -941,11 +943,13 @@
         <div class="marquee-row" data-marquee-dir="right">
                   <div class="marquee-track">
                               <div class="marquee-frame marquee-frame--video">
-                                            <iframe src="https://player.vimeo.com/video/1229654422?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                                          </div>
+                                <video src="images/modelo-stories-06.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                              </div>
+                              <div class="marquee-frame marquee-frame--video">
+                                <iframe src="https://player.vimeo.com/video/1229654422?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                              </div>
                                           <img class="marquee-tile" src="images/stories-02.png" alt="Modelo de landing page de curso de stories" loading="lazy" decoding="async">
-                              <img class="marquee-tile" src="images/01.png" alt="Projeto Base Code — site institucional" loading="lazy" decoding="async">
-                                          <div class="marquee-frame marquee-frame--video">
+                                                                                    <div class="marquee-frame marquee-frame--video">
                                                                                       <iframe src="https://player.vimeo.com/video/1229633595?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                                                                                     </div>
                                                                                     <div class="marquee-frame marquee-frame--video">
