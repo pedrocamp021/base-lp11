@@ -505,7 +505,21 @@
               pointer-events: none;
               background: #151917;
             }
-            /* Slot vazio (aguardando conteúdo do cliente) */
+        /* Card de vídeo (Vimeo/local): 16:9 nativo, sem cortar os lados */
+            .marquee-frame--video {
+              aspect-ratio: 16 / 9;
+            }
+            .marquee-frame--video iframe,
+            .marquee-frame--video video {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              transform: none;
+              object-fit: contain;
+              background: #0a0f1c;
+            }
+        /* Slot vazio (aguardando conteúdo do cliente) */
             .marquee-frame--empty {
               background:
                 radial-gradient(ellipse 60% 45% at 50% 42%, rgba(10, 116, 255, 0.10), transparent 70%),
@@ -521,20 +535,6 @@
               font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
               color: rgba(140, 180, 255, 0.38);
             }
-            /* Card de vídeo (Vimeo/local): 16:9 nativo, sem cortar os lados */
-            .marquee-frame--video {
-              aspect-ratio: 16 / 9;
-            }
-            .marquee-frame--video iframe,
-                        .marquee-frame--video video {
-                          position: absolute;
-                          inset: 0;
-                          width: 100%;
-                          height: 100%;
-                          transform: none;
-                          object-fit: contain;
-                          background: #0a0f1c;
-                        }
 
     /* ═══ NICOS ATENDIDOS (marquee 2 fileiras) ═══ */
         .nichos-section { background: var(--bg-deep); }
@@ -1462,6 +1462,27 @@
         var track = row.querySelector('.marquee-track, .nichos-track');
         if (track) liveMarquee(track, row);
       });
+
+      /* ═══ OTIMIZAÇÃO (autoplay mantido): pausa vídeo fora da tela ═══
+         Os tracks são triplicados, entao ha ~15 copias de cada video no DOM.
+         Sem isso, todas decodificam ao mesmo tempo (trava mobile).
+         Visivel → play normal (autoplay de verdade); fora da vista → pause. */
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            var v = en.target;
+            if (en.isIntersecting) {
+              if (v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
+            } else if (!v.paused) {
+              v.pause();
+            }
+          });
+        }, { rootMargin: '120px' });
+        document.querySelectorAll('.marquee-frame--video video').forEach(function (v) {
+          v.removeAttribute('autoplay');
+          io.observe(v);
+        });
+      }
     })();
   </script>
 
