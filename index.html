@@ -9,6 +9,9 @@
   <title>Base Code — Sites e Landing Pages que vendem por você</title>
   <meta name="description" content="A Base Code cria landing pages e sites profissionais para qualquer nicho. Design que passa confiança, entrega rápida e orçamento direto pelo WhatsApp.">
 
+  <!-- Efeito da hero: baixa o motor 3D desde já, em paralelo com o load (remove a demora do efeito aparecer) -->
+  <link rel="modulepreload" href="js/tubes1.min.js">
+
   <!-- Fontes: preconnect para liberar handshake TLS cedo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -702,14 +705,11 @@
       z-index: 2;
     }
 
+    /* Linha divisoria removida: o .kit-glow-line azul no fundo da hero era o
+       "traco" visivel na fronteira com o portfolio. As secoes ja compartilham
+       o mesmo fundo (#000), entao a emenda fica invisivel sem ele. */
     #tubes-section .kit-glow-line {
-      position: absolute !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      z-index: 5 !important;
+      display: none !important;
     }
 
     @media (max-width: 767px) {
@@ -816,17 +816,17 @@
         <div class="marquee-row" data-marquee-dir="right">
                   <div class="marquee-track">
                                                                   <div class="marquee-frame marquee-frame--video">
-                                                                    <video src="images/modelo-09.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                    <video src="images/modelo-09.mp4" muted loop playsinline preload="none" poster="images/poster-modelo-09.webp" tabindex="-1"></video>
                                                                   </div>
                                           <img class="marquee-tile" src="images/stories-02.png" alt="Modelo de landing page de curso de stories" loading="lazy" decoding="async">
                                                                                     <div class="marquee-frame marquee-frame--video">
                                                                                       <iframe src="https://player.vimeo.com/video/1229633595?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1" title="Modelo em vídeo" loading="lazy" tabindex="-1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                                                                                     </div>
                                                                                     <div class="marquee-frame marquee-frame--video">
-                                                                                                          <video src="images/modelo-nutricao-11.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                                                          <video src="images/modelo-nutricao-11.mp4" muted loop playsinline preload="none" poster="images/poster-modelo-nutricao-11.webp" tabindex="-1"></video>
                     </div>
                     <div class="marquee-frame marquee-frame--video">
-                                          <video src="images/modelo-psicologa-07.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                          <video src="images/modelo-psicologa-07.mp4" muted loop playsinline preload="none" poster="images/poster-modelo-psicologa-07.webp" tabindex="-1"></video>
                                         </div>
                                       </div>
                 </div>
@@ -836,7 +836,7 @@
                                         <iframe src="modelos/aurea-residences/index.html" title="Modelo Aurea Residences" loading="lazy" tabindex="-1"></iframe>
                                       </div>
                                       <div class="marquee-frame marquee-frame--video">
-                                                                              <video src="images/modelo-12.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                              <video src="images/modelo-12.mp4" muted loop playsinline preload="none" poster="images/poster-modelo-12.webp" tabindex="-1"></video>
                                                                             </div>
                                                                             <div class="marquee-frame">
                                                                                                   <iframe src="modelos/vesper/index.html" title="Modelo Vesper Marketing" loading="lazy" tabindex="-1"></iframe>
@@ -851,7 +851,7 @@
                                                                                                                                                                                 <iframe src="modelos/construa-rapido/index.html" title="Modelo Projete Rápido — Estúdio de Design com IA" loading="lazy" tabindex="-1"></iframe>
                                                                                                                                                                               </div>
                                                                                                                                                                               <div class="marquee-frame marquee-frame--video">
-                                                                                                                      <video src="images/modelo-13.mp4" autoplay muted loop playsinline preload="metadata" tabindex="-1"></video>
+                                                                                                                      <video src="images/modelo-13.mp4" muted loop playsinline preload="none" poster="images/poster-modelo-13.webp" tabindex="-1"></video>
                                                                                                                     </div>
                   </div>
                 </div>
@@ -1520,10 +1520,12 @@
     let tubesStarted = false;
 
     function scheduleIdle(task) {
+      // o download do motor ja acontece em paralelo (modulepreload no head);
+      // aqui so esperamos uma brecha curta de CPU pra inicializar sem travar o load
       if ("requestIdleCallback" in window) {
-        requestIdleCallback(task, { timeout: 1800 });
+        requestIdleCallback(task, { timeout: 400 });
       } else {
-        setTimeout(task, 350);
+        setTimeout(task, 120);
       }
     }
 
